@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, python3, pkgs, lib, ... }:
+{ config, pkgs, lib, ... }:
 
 let
   unstableTarball = fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
@@ -42,10 +42,10 @@ let
 	fi
 	${pkgs.pulseaudio}/bin/pactl set-default-sink $1
   '';
-  my-python-packages = python-packages: with python-packages; [ 
-	youtube_dl
-  ];
-  python-with-my-packages = python3.withPackages my-python-packages;
+  #my-python-packages = python-packages: with python-packages; [ 
+  #  youtube_dl
+  #];
+  #python-with-my-packages = python3.withPackages my-python-packages;
   ytmp = pkgs.writeShellScriptBin "ytmp" ''
 	if [ $# -lt 1]; then 
 		echo "not enough arguments"
@@ -89,8 +89,8 @@ in {
       libvdpau-va-gl
     ];
   };
-  # networking.hostName = "nixos"; # Define your hostname.
-  # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
+  networking.hostName = "fg002"; # Define your hostname.
+  #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
   # time.timeZone = "Europe/Amsterdam";
@@ -118,9 +118,7 @@ in {
 
   # Enable the GNOME Desktop Environment.
   services.xserver.displayManager.gdm.enable = true;
-  services.xserver.desktopManager.gnome.enable = true;
   services.xserver.windowManager.qtile.enable = true;
-  services.xserver.displayManager.defaultSession = "none+qtile";
 
   #hardware.nvidia.modesetting.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
@@ -233,7 +231,7 @@ hardware.nvidia.prime = {
     unstable.discord
     qtile
     python3
-    steam
+    unstable.steam
     gnome.nautilus
 	polybar
 	alsa-utils
@@ -241,8 +239,10 @@ hardware.nvidia.prime = {
 	libreoffice
 	brightnessctl
 	xorg.xbacklight
+    alacritty
 	openvpn
-	python-with-my-packages
+	rofi
+	#python-with-my-packages
   ];
   fonts.fonts = with pkgs; [
 	(nerdfonts.override { fonts = ["FiraCode"]; })
@@ -267,6 +267,7 @@ hardware.nvidia.prime = {
   # networking.firewall.allowedUDPPorts = [ ... ];
   # Or disable the firewall altogether.
   # networking.firewall.enable = false;
+  networking.networkmanager.enable = true;
   hardware.firmware = [ pkgs.rtw89-firmware ];
 
   # This value determines the NixOS release from which the default
