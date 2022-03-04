@@ -209,6 +209,14 @@ hardware.nvidia.prime = {
   programs.nm-applet.enable = true;
   services.blueman.enable = true;
   programs.light.enable = true;
+
+  environment.variables = {
+		#BROWSER = "google-chrome";
+    	TERMINAL = "alacritty";
+		EDITOR = "vim";
+  };
+
+
   
 
   # List packages installed in system profile. To search, run:
@@ -218,7 +226,7 @@ hardware.nvidia.prime = {
 	volume-change
 	volout
 	ytmp
-    vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
+    # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
     google-chrome
     nhentai
@@ -242,7 +250,27 @@ hardware.nvidia.prime = {
     alacritty
 	openvpn
 	rofi
+	nodejs
 	#python-with-my-packages
+    ((vim_configurable.override { python = python3; }).customize{
+      name = "vim";
+      vimrcConfig.packages.myplugins = with pkgs.vimPlugins; {
+        start = [ vim-nix coc-nvim coc-pyright ];
+        opt = [];
+      };
+      vimrcConfig.customRC = ''
+		set number
+		set tabstop=4
+		set nowrap
+		set nocompatible
+		set backspace=indent,eol,start
+	
+		syntax on
+		
+		filetype indent on 
+      '';
+    })
+
   ];
   fonts.fonts = with pkgs; [
 	(nerdfonts.override { fonts = ["FiraCode"]; })
