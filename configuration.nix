@@ -42,6 +42,17 @@ let
 	fi
 	${pkgs.pulseaudio}/bin/pactl set-default-sink $1
   '';
+  powermen = pkgs.writeShellScriptBin "powermen" ''
+	#!/usr/bin/env bash
+	opt=$(printf "suspend\nhibernate\npoweroff\nreboot" | rofi -dmenu)
+	if [[ $opt == "poweroff" || $opt == "reboot" ]]; then
+		conf=$(printf "yes\nno" | rofi -dmenu)
+		if [[ $conf == "no" ]]; then
+			exit 1
+		fi
+	fi
+	$(systemctl $opt) 
+  '';
   #my-python-packages = python-packages: with python-packages; [ 
   #  youtube_dl
   #];
@@ -153,44 +164,57 @@ hardware.nvidia.prime = {
 
   # Enable sound.
   #sound.enable = true;
-  hardware.pulseaudio.enable = false;
-  hardware.bluetooth.enable = true;
-  #services.blueman.enable = true;
-  security.rtkit.enable = true;
-	services.pipewire = {
+  services.pipewire = {
 		enable = true;
 		alsa.enable = true;
 		alsa.support32Bit = true;
 		pulse.enable = true;
-		# Enable JACK applicaitons
-		# jack.enable = true;
-
-		# Bluetooth Configuration
-		media-session.config.bluez-monitor.rules = [{
-			# Match all cards
-			matches = [ { "device.name" = "~bluez_card.*"; } ];
-			actions = {
-				"update-props" = {
-					"bluez5.auto-connect" = [ "hfp_hf" "hsp_hs" "a2dp_sink" ];
-					"bluez5.reconnect-profiles" = [ "hfp_hf" "hsp_hs" "a2dp_sink" ];
-					# mSBC is not expected to work on all headset + adapter combinations.
-					"bluez5.msbc-support" = true;
-					# SBC-XQ is not expected to work on all headset + adapter combinations.
-					"bluez5.sbc-xq-support" = true;
-				};
-			};
-		} {
-			matches = [
-				# Match all sources
+	    media-session.config.bluez-monitor.rules = [
+		     {
+			# Matches all cards
+		    matches = [ { "device.name" = "~bluez_card.*"; } ];
+	        actions = {
+	           "update-props" = {
+		          "bluez5.reconnect-profiles" = [ "hfp_hf" "hsp_hs" "a2dp_sink" ];
+             # mSBC is not expected to work on all headset + adapter combinations.
+          "bluez5.msbc-support" = true;
+          # SBC-XQ is not expected to work on all headset + adapter combinations.
+          "bluez5.sbc-xq-support" = true;
+        };
+      };
+    }
+    {
+		matches = [
+		# Matches all sources
 				{ "node.name" = "~bluez_input.*"; }
-				# Match all outputs
+				# Matches all outputs
 				{ "node.name" = "~bluez_output.*"; }
 			];
 			actions = {
 				"node.pause-on-idle" = false;
 			};
-		}];
-	};
+		}
+	];
+
+  # If you want to use JACK applications, uncomment this
+  #jack.enable = true;
+
+  # use the example session manager (no others are packaged yet so this is enabled by default,
+  # no need to redefine it in your config for now)
+  #media-session.enable = true;
+};
+
+  #services.blueman.enable = true;
+	hardware = {
+	  	pulseaudio.enable = false;
+		bluetooth = {
+			enable = true;
+				settings.General = {
+					Enable = "Source,Sink,Media,Socket";
+				};
+			};
+	  };                                              
+
   # Enable touchpad support (enabled default in most desktopManager).
 
   services.xserver.libinput.touchpad = {
@@ -212,7 +236,7 @@ hardware.nvidia.prime = {
 
   environment.variables = {
 		#BROWSER = "google-chrome";
-    	TERMINAL = "alacritty";
+		TERMINAL = "alacritty";
 		EDITOR = "vim";
   };
 
@@ -226,6 +250,7 @@ hardware.nvidia.prime = {
 	volume-change
 	volout
 	ytmp
+	powermen
     # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
     google-chrome
@@ -239,6 +264,7 @@ hardware.nvidia.prime = {
     unstable.discord
     qtile
     python3
+	openjdk11
     unstable.steam
     gnome.nautilus
 	polybar
@@ -247,9 +273,14 @@ hardware.nvidia.prime = {
 	libreoffice
 	brightnessctl
 	xorg.xbacklight
+	kitty
     alacritty
 	openvpn
+	unityhub
+	git-lfs
 	rofi
+	maim
+	xclip
 	nodejs
 	#python-with-my-packages
     ((vim_configurable.override { python = python3; }).customize{
