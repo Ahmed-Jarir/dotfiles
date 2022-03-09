@@ -53,6 +53,21 @@ let
 	fi
 	$(systemctl $opt) 
   '';
+  media = pkgs.writeShellScriptBin "media" ''
+	#!/usr/bin/env bash
+	if [ $# -ne 1 ]; then
+		echo "no argument was given"
+		exit 1
+	fi
+	if [[ $1 == "p" ]]; then
+		${pkgs.playerctl}/bin/playerctl play-pause
+	elif [[ $1 == "n" ]]; then
+    	${pkgs.playerctl}/bin/playerctl next
+	elif [[ $1 == "b" ]]; then
+    	${pkgs.playerctl}/bin/playerctl previous
+	fi
+  '';
+
   #my-python-packages = python-packages: with python-packages; [ 
   #  youtube_dl
   #];
@@ -251,6 +266,7 @@ hardware.nvidia.prime = {
 	volout
 	ytmp
 	powermen
+	media
     # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
     google-chrome
