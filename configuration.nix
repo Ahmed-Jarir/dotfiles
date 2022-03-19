@@ -5,7 +5,6 @@
 { config, pkgs, lib, ... }:
 
 let
-  unstableTarball = fetchTarball https://github.com/NixOS/nixpkgs/archive/nixos-unstable.tar.gz;
   nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
     export __NV_PRIME_RENDER_OFFLOAD=1
     export __NV_PRIME_RENDER_OFFLOAD_PROVIDER=NVIDIA-G0
@@ -47,7 +46,9 @@ let
 	opt=$(printf "suspend\nhibernate\npoweroff\nreboot" | rofi -dmenu)
 	if [[ $opt == "poweroff" || $opt == "reboot" ]]; then
 		conf=$(printf "yes\nno" | rofi -dmenu)
-		if [[ $conf == "no" ]]; then
+		if [[ $conf == "yes" ]]; then
+			$(systemctl $opt) 
+		else
 			exit 1
 		fi
 	fi
@@ -81,10 +82,13 @@ let
   '';
 in {
 
-
-  services.openvpn.servers = {
-    officeVPN  = { config = '' config /root/nixos/openvpn/officeVPN.conf ''; };
+  nix = {
+    package = pkgs.nixUnstable;
+    extraOptions = ''
+      experimental-features = nix-command flakes
+    '';
   };
+
 
   imports =
     [ # Include the results of the hardware scan.
@@ -103,9 +107,6 @@ in {
   nixpkgs.config.allowUnfree = true;
   nixpkgs.config.packageOverrides =  pkgs: {
     vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
-    unstable = import unstableTarball {
-      config = config.nixpkgs.config;
-    };
   };
   hardware.opengl = {
     enable = true;
@@ -210,14 +211,13 @@ hardware.nvidia.prime = {
 			};
 		}
 	];
-
+  };
   # If you want to use JACK applications, uncomment this
   #jack.enable = true;
 
   # use the example session manager (no others are packaged yet so this is enabled by default,
   # no need to redefine it in your config for now)
   #media-session.enable = true;
-};
 
   #services.blueman.enable = true;
 	hardware = {
@@ -277,11 +277,10 @@ hardware.nvidia.prime = {
     qemu
     ebtables
     zoom-us
-    unstable.discord
+    discord
     qtile
     python3
 	openjdk11
-    unstable.steam
     gnome.nautilus
 	polybar
 	alsa-utils
@@ -291,12 +290,13 @@ hardware.nvidia.prime = {
 	xorg.xbacklight
 	kitty
     alacritty
-	openvpn
 	unityhub
 	git-lfs
 	rofi
 	maim
 	xclip
+	hugo
+	gimp
 	nodejs
 	#python-with-my-packages
     ((vim_configurable.override { python = python3; }).customize{
