@@ -69,16 +69,12 @@ let
 	fi
   '';
 
-  #my-python-packages = python-packages: with python-packages; [ 
-  #  youtube_dl
-  #];
-  #python-with-my-packages = python3.withPackages my-python-packages;
   ytmp = pkgs.writeShellScriptBin "ytmp" ''
 	if [ $# -lt 1]; then 
 		echo "not enough arguments"
 		exit 1
 	fi
-	python3 /home/ahmed/Documents/pr/projects/ytmpbash/main.py $@
+	python3 /home/ahmed/Documents/pr/Projects/ytmpbash/main.py $@
   '';
 in {
 
@@ -112,15 +108,14 @@ in {
     enable = true;
     extraPackages = with pkgs; [
       vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-      vaapiVdpau
-      libvdpau-va-gl
+	  # vaapiVdpau
+	  libvdpau-va-gl
     ];
   };
   networking.hostName = "fg002"; # Define your hostname.
   #networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
 
   # Set your time zone.
-  # time.timeZone = "Europe/Amsterdam";
 
   # The global useDHCP flag is deprecated, therefore explicitly set to false here.
   # Per-interface useDHCP will be mandatory in the future, so this generated config
@@ -269,10 +264,15 @@ hardware.nvidia.prime = {
 	media
     # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
+	dotnet-sdk
+	msbuild
     google-chrome
+	qutebrowser
     nhentai
     whatsapp-for-linux
     virtmanager
+	jetbrains.rider
+	jetbrains.idea-ultimate
     libvirt
     qemu
     ebtables
@@ -280,7 +280,6 @@ hardware.nvidia.prime = {
     discord
     qtile
     python3
-	openjdk11
     gnome.nautilus
 	polybar
 	alsa-utils
@@ -298,11 +297,12 @@ hardware.nvidia.prime = {
 	hugo
 	gimp
 	nodejs
+	clang
 	#python-with-my-packages
     ((vim_configurable.override { python = python3; }).customize{
       name = "vim";
       vimrcConfig.packages.myplugins = with pkgs.vimPlugins; {
-        start = [ vim-nix coc-nvim coc-pyright ];
+        start = [ vim-nix coc-nvim coc-pyright coc-clangd ];
         opt = [];
       };
       vimrcConfig.customRC = ''
