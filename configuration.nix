@@ -43,7 +43,7 @@ let
   '';
   powermen = pkgs.writeShellScriptBin "powermen" ''
 	#!/usr/bin/env bash
-	opt=$(printf "suspend\nhibernate\npoweroff\nreboot" | rofi -dmenu)
+	opt=$(printf "suspend\nhibernate\npoweroff\nreboot\nlock" | rofi -dmenu -p PowerMenu)
 	if [[ $opt == "poweroff" || $opt == "reboot" ]]; then
 		conf=$(printf "yes\nno" | rofi -dmenu)
 		if [[ $conf == "yes" ]]; then
@@ -51,6 +51,8 @@ let
 		else
 			exit 1
 		fi
+	elif [[ $opt == "lock" ]]; then
+		physlock
 	fi
 	$(systemctl $opt) 
   '';
@@ -144,6 +146,10 @@ in {
 
   #hardware.nvidia.modesetting.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
+  services.physlock = {
+		  enable = true;
+		  allowAnyUser = true;
+  };
 
 hardware.nvidia.prime = {
   offload.enable = true;
@@ -264,6 +270,7 @@ hardware.nvidia.prime = {
 	media
     # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
     git
+	fd
 	dotnet-sdk
 	msbuild
     google-chrome
