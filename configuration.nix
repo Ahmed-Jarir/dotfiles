@@ -70,14 +70,6 @@ let
     	${pkgs.playerctl}/bin/playerctl previous
 	fi
   '';
-
-  ytmp = pkgs.writeShellScriptBin "ytmp" ''
-	if [ $# -lt 1]; then 
-		echo "not enough arguments"
-		exit 1
-	fi
-	python3 /home/ahmed/Documents/pr/Projects/ytmpbash/main.py $@
-  '';
 in {
 
   nix = {
@@ -110,7 +102,7 @@ in {
     enable = true;
     extraPackages = with pkgs; [
       vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
-	  # vaapiVdpau
+	  #vaapiVdpau
 	  libvdpau-va-gl
     ];
   };
@@ -249,6 +241,7 @@ hardware.nvidia.prime = {
   programs.nm-applet.enable = true;
   services.blueman.enable = true;
   programs.light.enable = true;
+  nix.autoOptimiseStore = true;
 
   environment.variables = {
 		#BROWSER = "google-chrome";
@@ -262,50 +255,67 @@ hardware.nvidia.prime = {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
   environment.systemPackages = with pkgs; [
+
+	#shell tools
     nvidia-offload
 	volume-change
 	volout
-	ytmp
 	powermen
 	media
-    # vim # Do not forget to add an editor to edit configuration.nix! The Nano editor is also installed by default.
-    git
-	fd
-	dotnet-sdk
-	msbuild
-    google-chrome
-	qutebrowser
-    nhentai
-    whatsapp-for-linux
-    virtmanager
+
+
+	#ides
 	jetbrains.rider
 	jetbrains.idea-ultimate
-    libvirt
+
+	#virtual machine
     qemu
+    libvirt
     ebtables
+
+	#soc
     zoom-us
     discord
+
+	#gui tools
+	hugo
+	rofi
     qtile
-    python3
-    gnome.nautilus
 	polybar
-	alsa-utils
+	unityhub
+    virtmanager
+	qutebrowser
 	foxitreader
 	libreoffice
-	brightnessctl
-	xorg.xbacklight
+    google-chrome
+    gnome.nautilus
+    whatsapp-for-linux
+
+	#art 
+	gimp
+	blender
+
+
+	#terminals
 	kitty
     alacritty
-	unityhub
-	git-lfs
-	rofi
+
+	#tools
+	fd
+    git
 	maim
 	xclip
-	hugo
-	gimp
-	nodejs
+	git-lfs
+    python3
+	msbuild
+	dotnet-sdk
+	alsa-utils
+	brightnessctl
+	xorg.xbacklight
+
+	#vim
 	clang
-	#python-with-my-packages
+	nodejs
     ((vim_configurable.override { python = python3; }).customize{
       name = "vim";
       vimrcConfig.packages.myplugins = with pkgs.vimPlugins; {
