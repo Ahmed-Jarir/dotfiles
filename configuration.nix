@@ -312,6 +312,7 @@ hardware.nvidia.prime = {
 	alsa-utils
 	brightnessctl
 	xorg.xbacklight
+	python39Packages.dbus-next
 
 	#vim
 	clang
