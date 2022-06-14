@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
 	shellAliases = {
-		rebuild = "sudo nixos-rebuild switch --flake /home/ahmed/dotfiles/";
+		rebuild = "sudo nixos-rebuild switch --flake /home/ahmed/dotfiles/ --impure";
 	#	ytmp = "python3 /home/ahmed/Documents/pr/Projects/ytmpbash/main.py";
 		qlog = "cat /home/ahmed/.local/share/qtile/qtile.log";
 	#	kanji = "Documents/pr/Projects/kanji/target/debug/kanji";
@@ -18,8 +18,11 @@ in {
 		enable = true;
 		enableBashIntegration = true;
 	};
-	programs.bash = {
-		enable = true;
+	programs.fish = {
+		inherit shellAliases;
+	};
+    programs.bash = {
+        enable = true;
 		inherit shellAliases;
 	};
 

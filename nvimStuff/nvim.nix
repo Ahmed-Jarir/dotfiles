@@ -6,11 +6,16 @@ pkgs:
 	    luafile /home/ahmed/dotfiles/nvimStuff/nvimConfig.lua
     '';
     plugins = with pkgs.vimPlugins; [
+        vim-nix
+        
         onehalf
         nvim-treesitter
-        vim-nix
+        
+        barbar-nvim
         coc-nvim
         coc-pyright
         coc-clangd
+        nvim-lspconfig
+        telescope-nvim
     ];	
 }

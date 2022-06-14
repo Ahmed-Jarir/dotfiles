@@ -6,6 +6,7 @@ vim.cmd [[
     set noswapfile
     set noerrorbells
     colorscheme onehalfdark
+    set backspace=indent,eol,start
     map ; :
 ]]
 
