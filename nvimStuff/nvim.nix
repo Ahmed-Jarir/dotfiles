@@ -7,6 +7,7 @@ pkgs:
     '';
     plugins = with pkgs.vimPlugins; [
         vim-nix
+        vim-devicons
         
         onehalf
         nvim-treesitter

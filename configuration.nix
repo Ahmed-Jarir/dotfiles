@@ -240,11 +240,9 @@ hardware.nvidia.prime = {
 
   programs.nm-applet.enable = true;
   programs.light.enable = true;
-  programs.fish.enable = true;
   services.blueman.enable = true;
   nix.autoOptimiseStore = true;
   users.defaultUserShell = pkgs.fish;
-  
 
   environment.variables = {
 		#BROWSER = "google-chrome";
@@ -301,7 +299,7 @@ hardware.nvidia.prime = {
 
 	#terminals
 	kitty
-    alacritty
+    #alacritty
 
 	#tools
 	fd
