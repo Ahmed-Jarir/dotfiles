@@ -246,7 +246,7 @@ hardware.nvidia.prime = {
   environment.variables = {
 		#BROWSER = "google-chrome";
 		TERMINAL = "alacritty";
-		EDITOR = "vim";
+		EDITOR = "nvim";
   };
 
 
@@ -317,41 +317,78 @@ hardware.nvidia.prime = {
 	#vim
 	clang
 	nodejs
-    ((vim_configurable.override { python = python3; }).customize{
-      name = "vim";
-      vimrcConfig.packages.myplugins = with pkgs.vimPlugins; {
-        start = [ vim-nix coc-nvim coc-pyright coc-clangd ];
-        opt = [];
-      };
-      vimrcConfig.customRC = ''
-		set number
-		set tabstop=4
-		set nowrap
-		set nocompatible
-		set backspace=indent,eol,start
-	
-		syntax on
-		
-		filetype indent on 
-		inoremap <silent><expr> <TAB>
-		      \ pumvisible() ? "\<C-n>" :
-			        \ <SID>check_back_space() ? "\<TAB>" :
-					      \ coc#refresh()
-						  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+    #((vim_configurable.override { python = python3; }).customize{
+    #  name = "vim";
+    #  vimrcConfig.packages.myplugins = with pkgs.vimPlugins; {
+    #    start = [ vim-nix coc-nvim coc-pyright coc-clangd ];
+    #    opt = [];
+    #  };
+    #  vimrcConfig.customRC = ''
+	#	set number
+	#	set tabstop=4
+	#	set nowrap
+	#	set nocompatible
+	#	set backspace=indent,eol,start
+	#
+	#	syntax on
+	#	
+	#	filetype indent on 
+	#	inoremap <silent><expr> <TAB>
+	#	      \ pumvisible() ? "\<C-n>" :
+	#		        \ <SID>check_back_space() ? "\<TAB>" :
+	#				      \ coc#refresh()
+	#					  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
-						  function! s:check_back_space() abort
-						    let col = col('.') - 1
-							  return !col || getline('.')[col - 1]  =~# '\s'
-							  endfunction
+	#					  function! s:check_back_space() abort
+	#					    let col = col('.') - 1
+	#						  return !col || getline('.')[col - 1]  =~# '\s'
+	#						  endfunction
 
-							  " Use <c-space> to trigger completion.
-							  if has('nvim')
-							    inoremap <silent><expr> <c-space> coc#refresh()
-								else
-								  inoremap <silent><expr> <c-@> coc#refresh()
-								  endif
-      '';
-    })
+	#						  " Use <c-space> to trigger completion.
+	#						  if has('nvim')
+	#						    inoremap <silent><expr> <c-space> coc#refresh()
+	#							else
+	#							  inoremap <silent><expr> <c-@> coc#refresh()
+	#							  endif
+    #  '';
+    #})
+    #(neovim.override {
+    #  configure = {
+    #    customRC = ''
+    #      # here your custom configuration goes!
+    #    	set number
+    #    	set tabstop=4
+    #    	set nowrap
+    #    	set nocompatible
+    #    	set backspace=indent,eol,start
+    #    
+    #    	syntax on
+    #    	  inoremap <silent><expr> <TAB>
+    #    	  \ pumvisible() ? "\<C-n>" :
+    #          \ <SID>check_back_space() ? "\<TAB>" :
+    #          \ coc#refresh()
+    #    	  inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
+
+    #    	function! s:check_back_space() abort
+    #    	    let col = col('.') - 1
+    #    		return !col || getline('.')[col - 1]  =~# '\s'
+    #    	endfunction
+
+    #    	" Use <c-space> to trigger completion.
+    #    	if has('nvim')
+    #    	  inoremap <silent><expr> <c-space> coc#refresh()
+    #    	else
+    #    	      inoremap <silent><expr> <c-@> coc#refresh()
+    #    	endif
+
+    #    '';
+    #    packages.myVimPackage = with pkgs.vimPlugins; {
+    #      # see examples below how to use custom packages
+    #      start = [ vim-nix coc-nvim coc-pyright coc-clangd onehalf ];
+    #      opt = [ ];
+    #    }; 
+    #  };     
+    #})
 
   ];
   fonts.fonts = with pkgs; [

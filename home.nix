@@ -6,9 +6,11 @@ let
 		qlog = "cat /home/ahmed/.local/share/qtile/qtile.log";
 	#	kanji = "Documents/pr/Projects/kanji/target/debug/kanji";
 	};
+	neovimConf = import /home/ahmed/dotfiles/nvimStuff/nvim.nix;
 in {
 	# Home Manager needs a bit of information about you and the
 	# paths it should manage.
+	programs.neovim = neovimConf pkgs;
 	home.username = "ahmed";
 	home.homeDirectory = "/home/ahmed";
 	programs.direnv = {
@@ -31,7 +33,7 @@ in {
 	# changes in each release.
 	home.stateVersion = "22.05";
 
-	programs.neovim.enable = true;
+	#programs.neovim.enable = true;
 	# Let Home Manager install and manage itself.
 	programs.home-manager.enable = true;
 }
