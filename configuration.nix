@@ -45,7 +45,7 @@ let
 	#!/usr/bin/env bash
 	opt=$(printf "suspend\nhibernate\npoweroff\nreboot\nlock" | rofi -dmenu -p PowerMenu)
 	if [[ $opt == "poweroff" || $opt == "reboot" ]]; then
-		conf=$(printf "yes\nno" | rofi -dmenu)
+		conf=$(printf "yes\nno" | rofi -dmenu -p confirm)
 		if [[ $conf == "yes" ]]; then
 			$(systemctl $opt) 
 		else
@@ -299,13 +299,13 @@ hardware.nvidia.prime = {
 
 	#terminals
 	kitty
-    #alacritty
 
 	#tools
 	fd
     git
 	maim
 	xclip
+    compton
 	git-lfs
     python3
 	msbuild

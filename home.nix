@@ -3,6 +3,7 @@ let
     shellAliases = {
     	  rebuild = "sudo nixos-rebuild switch --flake /home/ahmed/dotfiles/ --impure";
     	  qlog = "cat /home/ahmed/.local/share/qtile/qtile.log";
+          pks = "nix search nixpkgs";
     #	  kanji = "Documents/pr/Projects/kanji/target/debug/kanji";
     };
 
