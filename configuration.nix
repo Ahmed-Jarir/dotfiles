@@ -128,30 +128,55 @@ in {
   #   keyMap = "us";
   # };
  
-  # Enable the X11 windowing system.
-  services.xserver.enable = true;
+  services.xserver = {
+    # Enable the X11 windowing system.
+
+    enable = true;
+    displayManager.gdm.enable = true;
+
+    #hardware.nvidia.modesetting.enable = true;
+    videoDrivers = [ "nvidia" ];
+
+    # Enable touchpad support (enabled default in most desktopManager).
+    libinput = {
+      enable = true;
+      touchpad = {
+	    naturalScrolling = true;
+  	    middleEmulation = true;
+  	    tapping = true;
+      };
+    };
+
+    windowManager ={
+      qtile.enable = true;
+      xmonad = {
+        enable = true;
+        enableContribAndExtras = true;
+        extraPackages = haskellPackages: [
+          haskellPackages.dbus
+          haskellPackages.List
+          haskellPackages.monad-logger
+          haskellPackages.xmonad
+        ];
+      };
+    };
+  };
 
 
-  # Enable the GNOME Desktop Environment.
-  services.xserver.displayManager.gdm.enable = true;
-  services.xserver.windowManager.qtile.enable = true;
-
-  #hardware.nvidia.modesetting.enable = true;
-  services.xserver.videoDrivers = [ "nvidia" ];
   services.physlock = {
 		  enable = true;
 		  allowAnyUser = true;
   };
 
-hardware.nvidia.prime = {
-  offload.enable = true;
-
-  # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
-  amdgpuBusId = "PCI:5:0:0";
-
-  # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
-  nvidiaBusId = "PCI:1:0:0";
-};
+  hardware.nvidia.prime = {
+    offload.enable = true;
+  
+    # Bus ID of the Intel GPU. You can find it using lspci, either under 3D or VGA
+    amdgpuBusId = "PCI:5:0:0";
+  
+    # Bus ID of the NVIDIA GPU. You can find it using lspci, either under 3D or VGA
+    nvidiaBusId = "PCI:1:0:0";
+  };
 
   specialisation = {
     external-display.configuration = {
@@ -223,14 +248,8 @@ hardware.nvidia.prime = {
 			};
 	  };                                              
 
-  # Enable touchpad support (enabled default in most desktopManager).
 
-  services.xserver.libinput.touchpad = {
-		naturalScrolling = true;
-  		middleEmulation = true;
-  		tapping = true;
-  };
-  services.xserver.libinput.enable = true;
+
   # Define a user account. Don't forget to set a password with ‘passwd’.
   users.users.ahmed = {
     isNormalUser = true;
