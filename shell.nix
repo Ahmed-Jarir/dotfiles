@@ -13,41 +13,60 @@ in {
         enable = true;
     	inherit shellAliases;
 		shellInit = ''
-			fish_vi_key_bindings
 			set fish_greeting
+            set -U namebg '242F9B'
+            set -U dirTypeBg '646FD4'
+            set -U dirBg '9BA3EB'
+            set -U normalFontColor '000000'
+            
+
             function fish_prompt
 
-            set -l namebg '242F9B'
-            set -l dirTypeBg '646FD4'
-            set -l dirBg '9BA3EB'
-            set -l normalFontColor '000000'
-            set_color white -b $namebg
 
-            printf ' %s ' (whoami)
-            set_color normal
-            set_color $namebg -b $dirTypeBg
-            printf ''
-            set_color $normalFontColor -b $dirTypeBg
-            if [ (prompt_pwd) = '~' ]
-                printf ' ~ '
-                set_color $dirTypeBg -b normal
+                #set_color white -b $namebg
+                #printf ' %s ' (whoami)
+                set_color normal
+                set_color $namebg -b $dirTypeBg
                 printf ''
-            else if [ (prompt_pwd) = '/' ]
-                printf ' / '
-                set_color $dirTypeBg -b normal
-                printf ''
-            else
-                printf '  '
-                set_color $dirTypeBg -b $dirBg
-                printf ''
-                set_color $normalFontColor -b $dirBg
-                printf ' %s ' (prompt_pwd)
-                set_color $dirBg -b normal
-                printf ''
+                set_color $normalFontColor -b $dirTypeBg
+                if [ (prompt_pwd) = '~' ]
+                    printf ' ~ '
+                    set_color $dirTypeBg -b normal
+                    printf ''
+                else if [ (prompt_pwd) = '/' ]
+                    printf ' / '
+                    set_color $dirTypeBg -b normal
+                    printf ''
+                else
+                    printf '  '
+                    set_color $dirTypeBg -b $dirBg
+                    printf ''
+                    set_color $normalFontColor -b $dirBg
+                    printf ' %s ' (prompt_pwd)
+                    set_color $dirBg -b normal
+                    printf ''
+              end
+              printf " "
             end
 
-            set_color normal
+			fish_vi_key_bindings
+            function fish_mode_prompt --description 'Displays the current mode'
+                set_color --bold white -b $namebg
+                switch $fish_bind_mode
+                    case default
+                        printf '  '
+                    case insert
+                        printf '  '
+                    case replace_one
+                        printf '  '
+                    case visual
+                        printf '  '
+                    case '*'
+                        printf '  '
+                end
+                set_color normal
             end
+
         '';
         plugins = [
 
