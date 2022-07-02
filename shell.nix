@@ -17,6 +17,7 @@ in {
             set -U namebg '242F9B'
             set -U dirTypeBg '646FD4'
             set -U dirBg '9BA3EB'
+            set -U gitBg 'DBDFFD'
             set -U normalFontColor '000000'
             
 
@@ -43,8 +44,18 @@ in {
                     printf ''
                     set_color $normalFontColor -b $dirBg
                     printf ' %s ' (prompt_pwd)
-                    set_color $dirBg -b normal
-                    printf ''
+                    if [ (git show-branch | sed 's/\[\(.*\)\].*/\1/') = 'master' ]
+                        set_color $dirBg -b $gitBg
+                        printf ''
+                        set_color $normalFontColor -b $gitBg
+                        printf '  '
+                        set_color $gitBg -b normal
+                        printf ''
+                    else 
+                        set_color $dirBg -b normal
+                        printf ''
+                    end
+
               end
               printf " "
             end
