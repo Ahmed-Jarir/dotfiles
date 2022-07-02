@@ -79,6 +79,7 @@ in {
 
 
 	#ides
+	jetbrains.clion
 	jetbrains.rider
 	jetbrains.idea-ultimate
 
