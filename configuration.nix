@@ -121,9 +121,9 @@
         enable = true;
         enableContribAndExtras = true;
         extraPackages = haskellPackages: [
-          haskellPackages.xmonad-contrib
+          haskellPackages.xmonad-contrib_0_17_0
           haskellPackages.xmonad-extras
-          haskellPackages.xmonad
+          haskellPackages.xmonad_0_17_0
           haskellPackages.xmonad-utils
           haskellPackages.xmobar
           haskellPackages.dbus
@@ -235,6 +235,7 @@
 
   fonts.fonts = with pkgs; [
 	(nerdfonts.override { fonts = ["FiraCode"]; })
+     
   ];
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

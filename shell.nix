@@ -44,7 +44,8 @@ in {
                     printf ''
                     set_color $normalFontColor -b $dirBg
                     printf ' %s ' (prompt_pwd)
-                    if [ (git show-branch | sed 's/\[\(.*\)\].*/\1/') = 'master' ]
+                    git status > /dev/null 2>&1
+                    if [ $status -eq 0 ]
                         set_color $dirBg -b $gitBg
                         printf ''
                         set_color $normalFontColor -b $gitBg

@@ -137,5 +137,10 @@ in {
 	clang
 	nodejs
 
+    #fonts 
+    font-awesome
+
+    #work
+    odoo
   ];
 }
