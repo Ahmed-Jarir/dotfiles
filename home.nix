@@ -17,11 +17,22 @@ in {
    	programs.neovim = neovimConf pkgs;
 	home.username = "ahmed";
 	home.homeDirectory = "/home/ahmed";
-    programs.direnv = {
-		nix-direnv.enable = true;
-		enable = true;
-		enableBashIntegration = true;
-	};
+    programs = {
+      direnv = {
+	  	nix-direnv.enable = true;
+	  	enable = true;
+	  	enableBashIntegration = true;
+	  };
+
+      vscode = {
+        enable = true;
+        extensions = with pkgs.vscode-extensions; [
+          dracula-theme.theme-dracula
+          vscodevim.vim
+          ms-dotnettools.csharp
+        ];
+      };
+    };
     imports = [ ./shell.nix ];
 
 	# This value determines the Home Manager release that your

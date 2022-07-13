@@ -66,7 +66,29 @@ let
     	${pkgs.playerctl}/bin/playerctl previous
 	fi
   '';
+  #ytmp = pkgs.writeShellScriptBin "ytmp" ''
+  #  cd /home/ahmed/Documents/pr/Projects/ytmp/
+  #  python main.py "$@"
+  #'';
+  ytmpMenu = pkgs.writeShellScriptBin "ytmpMenu" ''
+	opt=$(printf "audio\nvideo" | rofi -dmenu -p flag)
+
+	if [[ $opt == "audio" || $opt == "video" ]]; then
+      links=$(rofi -dmenu -p links)
+      ytmp --opt links
+    fi
+  '';
   #end of shell apps
+  ytmp = with pkgs.python3Packages; buildPythonPackage rec {
+    name = "ytmp";
+    src = /home/ahmed/Documents/pr/Projects/ytmp;
+    propagatedBuildInputs = [ 			  
+  	  youtube-dl 
+  	  pytube 
+    ];
+  };
+
+
 in {
   environment.systemPackages = with pkgs; [
 
@@ -76,6 +98,8 @@ in {
 	volout
 	powermen
 	media
+    ytmp
+    ytmpMenu
 
 
 	#ides
@@ -93,13 +117,13 @@ in {
     discord
 
 	#gui tools
-	hugo
 	rofi
     dmenu
     qtile
     xmobar
 	polybar
 	unityhub
+    notify-osd
     virtmanager
 	qutebrowser
 	foxitreader
@@ -140,7 +164,5 @@ in {
     #fonts 
     font-awesome
 
-    #work
-    odoo
   ];
 }
