@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 let
   #shell apps
   nvidia-offload = pkgs.writeShellScriptBin "nvidia-offload" ''
@@ -66,27 +66,16 @@ let
     	${pkgs.playerctl}/bin/playerctl previous
 	fi
   '';
-  #ytmp = pkgs.writeShellScriptBin "ytmp" ''
-  #  cd /home/ahmed/Documents/pr/Projects/ytmp/
-  #  python main.py "$@"
-  #'';
   ytmpMenu = pkgs.writeShellScriptBin "ytmpMenu" ''
 	opt=$(printf "audio\nvideo" | rofi -dmenu -p flag)
 
 	if [[ $opt == "audio" || $opt == "video" ]]; then
       links=$(rofi -dmenu -p links)
-      ytmp --opt links
+      /home/ahmed/Documents/pr/Projects/ytmp/result/bin/ytmp --$opt $links
     fi
   '';
   #end of shell apps
-  ytmp = with pkgs.python3Packages; buildPythonPackage rec {
-    name = "ytmp";
-    src = /home/ahmed/Documents/pr/Projects/ytmp;
-    propagatedBuildInputs = [ 			  
-  	  youtube-dl 
-  	  pytube 
-    ];
-  };
+
 
 
 in {
@@ -98,7 +87,6 @@ in {
 	volout
 	powermen
 	media
-    ytmp
     ytmpMenu
 
 
@@ -129,7 +117,7 @@ in {
 	foxitreader
 	libreoffice
     google-chrome
-    xorg.xmessage
+    gxmessage
     gnome.nautilus
     whatsapp-for-linux
 
@@ -146,6 +134,7 @@ in {
     git
 	maim
 	xclip
+    ffmpeg
     compton
 	git-lfs
     python3

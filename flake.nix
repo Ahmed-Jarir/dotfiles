@@ -6,9 +6,10 @@
 	# nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
 	nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
+    ytmp.url = "github:Ahmed-Jarir/yt-mp";
   };
 
-  outputs = { nixpkgs, home-manager, ... }:
+  outputs = { nixpkgs, home-manager, ytmp, ... }:
     let
       system = "x86_64-linux";
       username = "ahmed";
