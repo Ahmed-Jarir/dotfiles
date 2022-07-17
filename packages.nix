@@ -88,12 +88,13 @@ in {
 	powermen
 	media
     ytmpMenu
-
+    postgresql_14
 
 	#ides
 	jetbrains.clion
 	jetbrains.rider
 	jetbrains.idea-ultimate
+    jetbrains.pycharm-professional
 
 	#virtual machine
     qemu
@@ -152,6 +153,9 @@ in {
 
     #fonts 
     font-awesome
+
+    #db plat
+    pgadmin
 
   ];
 }
