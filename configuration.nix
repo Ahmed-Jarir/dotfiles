@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, inputs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
 
@@ -22,6 +22,9 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./packages.nix
+#      {
+#        inherit ytmp;
+#      }
     ];
 
   # Use the systemd-boot EFI boot loader.
@@ -101,7 +104,6 @@
     # Enable the X11 windowing system.
 
     enable = true;
-    displayManager.gdm.enable = true;
 
     #hardware.nvidia.modesetting.enable = true;
     videoDrivers = [ "nvidia" ]; #"amdgpu" ]; #
@@ -113,6 +115,17 @@
   	    middleEmulation = true;
   	    tapping = true;
       };
+    };
+
+    displayManager.sddm = {
+      enable = true;
+      theme = "${(pkgs.fetchFromGitHub {
+        owner = "Kangie";
+        repo = "sddm-sugar-candy";
+               
+        rev = "a1fae5159c8f7e44f0d8de124b14bae583edb5b8";
+        sha256 = "sha256-p2d7I0UBP63baW/q9MexYJQcqSmZ0L5rkwK3n66gmqM=";
+      })}";
     };
 
     windowManager ={
@@ -135,7 +148,10 @@
   };
 
   services = {
-
+    postgresql = {
+      enable = true;
+      package = pkgs.postgresql_13;
+    };
     blueman.enable = true;
     dbus.packages = with pkgs; [ blueman ];
 
@@ -180,7 +196,6 @@
       #end of pipwire conf
 
   };
-
 
 
   specialisation = {

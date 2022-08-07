@@ -6,19 +6,32 @@
 	# nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
 	nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
-    ytmp.url = "github:Ahmed-Jarir/yt-mp";
+    ytmpPkg.url = "github:Ahmed-Jarir/yt-mp";
+    nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { nixpkgs, home-manager, ytmp, ... }:
+  outputs = { nixpkgs, home-manager, ytmpPkg, nur, ... }:
     let
       system = "x86_64-linux";
       username = "ahmed";
+      pkgs = nixpkgs.legacyPackages.${system};
+      ytmp = ytmpPkg.defaultPackage.${system}; 
+      lib =  nixpkgs.lib;
     in {
      # Define a system called "nixos"
     nixosConfigurations."fg002" = nixpkgs.lib.nixosSystem {
       system = "x86_64-linux";
       modules = [
+        #{
+        #  nur-no-pkgs = import nur {
+        #    nurpkgs = import nixpkgs { system = "x86_64-linux"; };
+        #    repoOverrides = { ytmp = import ytmp { }; };
+        #  };
+        #}
         ./configuration.nix
+        #{
+        #  inherit ytmp;
+        #}
 		home-manager.nixosModules.home-manager
 		({ pkgs, config, ... }: {
 			home-manager = {

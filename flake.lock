@@ -125,6 +125,21 @@
         "type": "indirect"
       }
     },
+    "nur": {
+      "locked": {
+        "lastModified": 1658082336,
+        "narHash": "sha256-pbf0nkDAZNOynCKOK6UnHmdPq00+R1W1pfr9FeNwkNY=",
+        "owner": "nix-community",
+        "repo": "NUR",
+        "rev": "7a681c8c520c58b01df80270089c90fbfb12f582",
+        "type": "github"
+      },
+      "original": {
+        "owner": "nix-community",
+        "repo": "NUR",
+        "type": "github"
+      }
+    },
     "pypi-deps-db": {
       "flake": false,
       "locked": {
@@ -145,21 +160,22 @@
       "inputs": {
         "home-manager": "home-manager",
         "nixpkgs": "nixpkgs_2",
-        "ytmp": "ytmp"
+        "nur": "nur",
+        "ytmpPkg": "ytmpPkg"
       }
     },
-    "ytmp": {
+    "ytmpPkg": {
       "inputs": {
         "flake-utils": "flake-utils",
         "mach-nix": "mach-nix",
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
-        "lastModified": 1657783407,
-        "narHash": "sha256-M6QLNBdw4P34+ykLf8ZCBrKW1RNtc5Iyujtrutc/Bxs=",
+        "lastModified": 1658004378,
+        "narHash": "sha256-spam47dmBul3RxxqA8f+ilQaKmrfKG0eOf+QpTQu+f8=",
         "owner": "Ahmed-Jarir",
         "repo": "yt-mp",
-        "rev": "ff41db47f179c9f9d0a78566bd34baca4b74d8d4",
+        "rev": "289b59ee09b56bebf64675a4dd0074abbf4dc0f0",
         "type": "github"
       },
       "original": {

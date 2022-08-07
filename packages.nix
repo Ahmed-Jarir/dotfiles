@@ -75,12 +75,16 @@ let
     fi
   '';
   #end of shell apps
+  my-python-packages = python-packages: with python-packages; [
+    matplotlib
+  ]; 
+  python-with-my-packages = pkgs.python3.withPackages my-python-packages;
 
 
 
 in {
   environment.systemPackages = with pkgs; [
-
+    python-with-my-packages
 	#shell tools
     nvidia-offload
 	volume-change
@@ -88,7 +92,6 @@ in {
 	powermen
 	media
     ytmpMenu
-    postgresql_14
 
 	#ides
 	jetbrains.clion
@@ -113,6 +116,7 @@ in {
 	polybar
 	unityhub
     notify-osd
+    stalonetray
     virtmanager
 	qutebrowser
 	foxitreader
@@ -121,6 +125,7 @@ in {
     gxmessage
     gnome.nautilus
     whatsapp-for-linux
+
 
 	#art 
 	gimp
@@ -138,14 +143,16 @@ in {
     ffmpeg
     compton
 	git-lfs
-    python3
-	msbuild
+    ripgrep
+    python39Full
+    msbuild
     nitrogen
 	dotnet-sdk
 	alsa-utils
 	brightnessctl
 	xorg.xbacklight
 	python39Packages.dbus-next
+	python39Packages.matplotlib
 
 	#vim
 	clang
@@ -155,7 +162,17 @@ in {
     font-awesome
 
     #db plat
-    pgadmin
+    pgadmin4
+
+
+    cool-retro-term
+    jmeter
+
+    #music player
+    mpd
+    mpc-cli
+    ncmpcpp
+    libsForQt5.qt5.qtgraphicaleffects
 
   ];
 }
