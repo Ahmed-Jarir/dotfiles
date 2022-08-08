@@ -30,8 +30,29 @@
   # Use the systemd-boot EFI boot loader.
   boot = {
     loader = {
-      systemd-boot.enable = true;
-      efi.canTouchEfiVariables = true;
+      #systemd-boot.enable = true;
+      efi = {
+        canTouchEfiVariables = true;
+        efiSysMountPoint = "/boot";
+      };
+      grub = {
+        enable = true;
+        version=2;
+        efiSupport = true;
+        #efiInstallAsRemovable = true; # in case canTouchEfiVariables doesn't work for your system
+        device = "nodev";
+        useOSProber = true;
+        extraEntries = ''
+                menuentry "Windows" {
+                  insmod part_gpt
+                  insmod fat
+                  insmod search_fs_uuid
+                  insmod chain
+                  search --fs-uuid --set=root $FS_UUID
+                  chainloader /EFI/Microsoft/Boot/bootmgfw.efi
+                }
+              '';
+        };
     };
   };
   # systemd.services.blueman = {
