@@ -74,6 +74,7 @@ let
       /home/ahmed/Documents/pr/Projects/ytmp/result/bin/ytmp --$opt $links
     fi
   '';
+  #hard coded path is temporary
   #end of shell apps
   my-python-packages = python-packages: with python-packages; [
     matplotlib
@@ -83,6 +84,7 @@ let
 
 
 in {
+
   environment.systemPackages = with pkgs; [
     python-with-my-packages
 	#shell tools
@@ -107,14 +109,14 @@ in {
 	#soc
     zoom-us
     discord
+    whatsapp-for-linux
 
 	#gui tools
 	rofi
     dmenu
-    qtile
     xmobar
 	polybar
-	unityhub
+    gxmessage
     notify-osd
     stalonetray
     virtmanager
@@ -122,15 +124,15 @@ in {
 	foxitreader
 	libreoffice
     google-chrome
-    gxmessage
     gnome.nautilus
-    whatsapp-for-linux
 
+
+    #game dev 
+	unityhub
 
 	#art 
 	gimp
 	blender
-
 
 	#terminals
 	kitty
@@ -140,19 +142,17 @@ in {
     git
 	maim
 	xclip
-    ffmpeg
     compton
 	git-lfs
     ripgrep
-    python39Full
     msbuild
     nitrogen
 	dotnet-sdk
 	alsa-utils
+    python39Full
 	brightnessctl
 	xorg.xbacklight
 	python39Packages.dbus-next
-	python39Packages.matplotlib
 
 	#vim
 	clang
@@ -165,14 +165,18 @@ in {
     pgadmin4
 
 
-    cool-retro-term
-    jmeter
 
     #music player
     mpd
     mpc-cli
     ncmpcpp
-    libsForQt5.qt5.qtgraphicaleffects
 
+
+    #website testing
+    soapui
+    jmeter
+
+    cool-retro-term
+    libsForQt5.qt5.qtgraphicaleffects
   ];
 }

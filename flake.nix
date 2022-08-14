@@ -13,14 +13,13 @@
   outputs = { nixpkgs, home-manager, ytmpPkg, nur, ... }:
     let
       system = "x86_64-linux";
-      username = "ahmed";
       pkgs = nixpkgs.legacyPackages.${system};
-      ytmp = ytmpPkg.defaultPackage.${system}; 
+      ytmp = ytmpPkg.defaultPackage.${system};
       lib =  nixpkgs.lib;
     in {
      # Define a system called "nixos"
     nixosConfigurations."fg002" = nixpkgs.lib.nixosSystem {
-      system = "x86_64-linux";
+      inherit system;
       modules = [
         #{
         #  nur-no-pkgs = import nur {
@@ -28,6 +27,8 @@
         #    repoOverrides = { ytmp = import ytmp { }; };
         #  };
         #}
+        
+        { nixpkgs.overlays = [ nur.overlay ]; }
         ./configuration.nix
         #{
         #  inherit ytmp;

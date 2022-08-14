@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, lib, ... }:
+{ config, pkgs, lib, ytmp, ... }:
 
 {
 
@@ -270,7 +270,8 @@
   
 
   fonts.fonts = with pkgs; [
-	(nerdfonts.override { fonts = ["FiraCode"]; })
+	(nerdfonts.override { fonts = [ "FiraCode" ]; })
+    font-awesome_5
      
   ];
   # Some programs need SUID wrappers, can be configured further or are

@@ -6,7 +6,6 @@ let
       pks = "nix search nixpkgs";
       xConf = "vim /home/ahmed/.xmonad/xmonad.hs";
       qConf = "vim .config/qtile/config.py";
-      ytmp = "/home/ahmed/Documents/pr/Projects/ytmp/result/bin/ytmp";
       nflake = "nix flake new -t github:nix-community/nix-direnv ./";
   #	  kanji = "Documents/pr/Projects/kanji/target/debug/kanji";
   };
