@@ -20,6 +20,7 @@
      # Define a system called "nixos"
     nixosConfigurations."fg002" = nixpkgs.lib.nixosSystem {
       inherit system;
+
       modules = [
         #{
         #  nur-no-pkgs = import nur {
@@ -30,9 +31,7 @@
         
         { nixpkgs.overlays = [ nur.overlay ]; }
         ./configuration.nix
-        #{
-        #  inherit ytmp;
-        #}
+
 		home-manager.nixosModules.home-manager
 		({ pkgs, config, ... }: {
 			home-manager = {

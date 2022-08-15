@@ -8,6 +8,7 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
+
     boot = { 
       initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
       initrd.kernelModules = [ ];#"amdgpu" ];
@@ -33,5 +34,41 @@
     [ { device = "/dev/disk/by-uuid/e61fff74-673b-4e1d-99c4-1f8b8079fa49"; }
     ];
 
-  hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+  hardware = {
+    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    #opengl.driSupport = true;
+    firmware = [ pkgs.rtw89-firmware ];
+
+    opengl = {
+      enable = true;
+      extraPackages = with pkgs; [
+        #rocm-opencl-icd
+        #rocm-opencl-runtime
+        #amdvlk
+        vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+        libvdpau-va-gl
+      ];
+    };
+    nvidia.prime = {
+      offload.enable = true;
+  
+      amdgpuBusId = "PCI:5:0:0";
+  
+      nvidiaBusId = "PCI:1:0:0";
+    };
+    pulseaudio.enable = false;
+	bluetooth = {
+	  enable = true;
+	  settings.General = {
+	  	Enable = "Source,Sink,Media,Socket";
+	  };
+	};
+  };
+  specialisation = {
+    external-display.configuration = {
+      system.nixos.tags = [ "external-display" ];
+      hardware.nvidia.prime.offload.enable = lib.mkForce false;
+      hardware.nvidia.powerManagement.enable = lib.mkForce false;
+    };
+  };
 }

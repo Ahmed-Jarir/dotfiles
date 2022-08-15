@@ -5,11 +5,21 @@ vim.cmd [[
     set nowrap
     set noswapfile
     set noerrorbells
+
     colorscheme onehalfdark
     set backspace=indent,eol,start
     map ; :
 ]]
 
+require('nvim_comment').setup({
+      marker_mapping = true
+
+    , comment_empty_trim_whitespace = false 
+    -- Should key mappings be created
+    , create_mappings = true
+    , comment_empty = false
+    , line_mapping = "<leader>lc", operator_mapping = "<leader>c", comment_chunk_text_object = "ic"
+})
 g.mapleader = ' '
 
 opt.smartindent = true

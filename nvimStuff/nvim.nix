@@ -18,5 +18,6 @@ pkgs:
         coc-clangd
         nvim-lspconfig
         telescope-nvim
+        nvim-comment
     ];	
 }
