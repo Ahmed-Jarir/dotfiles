@@ -6,10 +6,8 @@ pkgs:
 	    luafile /home/ahmed/dotfiles/nvimStuff/nvimConfig.lua
     '';
     plugins = with pkgs.vimPlugins; [
+
         vim-nix
-        nvim-web-devicons
-        
-        
         barbar-nvim
         coc-nvim
         coc-pyright
@@ -18,9 +16,15 @@ pkgs:
         telescope-nvim
         nvim-comment
 
+        neogit
+
+        vim-kitty-navigator
+
+        #eye candy
         onehalf
         lualine-nvim
-        nvim-treesitter
+        nvim-web-devicons
+        (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
         (pkgs.fetchFromGitHub {
           owner = "xiyaowong";
           repo = "nvim-transparent";
