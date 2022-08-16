@@ -22,6 +22,7 @@
     [ # Include the results of the hardware scan.
       ./hardware-configuration.nix
       ./packages.nix
+      ./services.nix
       ./sddm.nix
       ./boot.nix
 #      {

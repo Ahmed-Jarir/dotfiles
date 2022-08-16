@@ -9,8 +9,6 @@ pkgs:
         vim-nix
         nvim-web-devicons
         
-        onehalf
-        nvim-treesitter
         
         barbar-nvim
         coc-nvim
@@ -19,5 +17,15 @@ pkgs:
         nvim-lspconfig
         telescope-nvim
         nvim-comment
+
+        onehalf
+        lualine-nvim
+        nvim-treesitter
+        (pkgs.fetchFromGitHub {
+          owner = "xiyaowong";
+          repo = "nvim-transparent";
+          rev = "1a3d7d3b7670fecbbfddd3fc999ddea5862ac3c2";
+          sha256 = "sha256-ollCztmgulpMTyoks9ENMSmzE52dF9sMXti9ZF1SHnE=";
+        })
     ];	
 }
