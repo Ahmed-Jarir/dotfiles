@@ -66,50 +66,28 @@ let
     	${pkgs.playerctl}/bin/playerctl previous
 	fi
   '';
-  ytmpMenu = pkgs.writeShellScriptBin "ytmpMenu" ''
-	opt=$(printf "audio\nvideo" | rofi -dmenu -p flag)
 
-	if [[ $opt == "audio" || $opt == "video" ]]; then
-      links=$(rofi -dmenu -p links)
-      /home/ahmed/Documents/pr/Projects/ytmp/result/bin/ytmp --$opt $links
-    fi
-  '';
   #hard coded path is temporary
   #end of shell apps
-  my-python-packages = python-packages: with python-packages; [
-    matplotlib
-  ]; 
-  python-with-my-packages = pkgs.python3.withPackages my-python-packages;
-
-
 
 in {
 
   environment.systemPackages = with pkgs; [
-    python-with-my-packages
-	#shell tools
+
+	#shell packages
     nvidia-offload
 	volume-change
 	volout
 	powermen
 	media
-    ytmpMenu
 
-	#ides
-	jetbrains.clion
-	jetbrains.rider
-	jetbrains.idea-ultimate
-    jetbrains.pycharm-professional
 
 	#virtual machine
     qemu
     libvirt
     ebtables
+    virtmanager
 
-	#soc
-    zoom-us
-    discord
-    whatsapp-for-linux
 
 	#gui tools
 	rofi
@@ -119,7 +97,6 @@ in {
     gxmessage
     notify-osd
     stalonetray
-    virtmanager
 	qutebrowser
 	foxitreader
 	libreoffice
@@ -127,15 +104,6 @@ in {
     gnome.nautilus
 
 
-    #game dev 
-	unityhub
-
-	#art 
-	gimp
-	blender
-
-	#terminals
-	kitty
 
 	#tools
 	fd
@@ -161,22 +129,6 @@ in {
     #fonts 
     font-awesome
 
-    #db plat
-    pgadmin4
-
-
-
-    #music player
-    mpd
-    mpc-cli
-    ncmpcpp
-
-
-    #website testing
-    soapui
-    jmeter
-
-    cool-retro-term
     libsForQt5.qt5.qtgraphicaleffects
   ];
 }

@@ -33,7 +33,12 @@ in {
         ];
       };
     };
-    imports = [ ./shell.nix ];
+
+    imports = [ 
+      ./shell.nix 
+      ./home-pkgs.nix
+    ];
+
 
 	# This value determines the Home Manager release that your
 	# configuration is compatible with. This helps avoid breakage

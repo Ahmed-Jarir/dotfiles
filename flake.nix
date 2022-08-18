@@ -6,16 +6,17 @@
 	# nixpkgs.url = "github:NixOS/nixpkgs/nixos-21.11";
 	nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
-    ytmpPkg.url = "github:Ahmed-Jarir/yt-mp";
+    ytmp.url = "github:Ahmed-Jarir/yt-mp";
     nur.url = "github:nix-community/NUR";
   };
 
-  outputs = { nixpkgs, home-manager, ytmpPkg, nur, ... }:
+  outputs = { nixpkgs, home-manager, ytmp, nur, ... }:
     let
+
       system = "x86_64-linux";
-      pkgs = nixpkgs.legacyPackages.${system};
-      ytmp = ytmpPkg.defaultPackage.${system};
-      lib =  nixpkgs.lib;
+
+      lib = nixpkgs.lib;
+
     in {
      # Define a system called "nixos"
     nixosConfigurations."fg002" = nixpkgs.lib.nixosSystem {
@@ -29,7 +30,7 @@
         #  };
         #}
         
-        { nixpkgs.overlays = [ nur.overlay ]; }
+        { nixpkgs.overlays = [ nur.overlay ytmp.overlays.${system}.default]; }
         ./configuration.nix
 
 		home-manager.nixosModules.home-manager
@@ -38,7 +39,7 @@
 				useGlobalPkgs = true;
 				useUserPackages = true;
 				users = {
-					ahmed = import ./user.nix;
+					ahmed = import ./user.nix; 
 				};
 			};
 		})
