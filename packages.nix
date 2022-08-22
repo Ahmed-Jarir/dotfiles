@@ -117,7 +117,7 @@ in {
     nitrogen
 	dotnet-sdk
 	alsa-utils
-    python39Full
+    python3
 	brightnessctl
 	xorg.xbacklight
 	python39Packages.dbus-next
