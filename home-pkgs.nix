@@ -24,6 +24,7 @@ in {
     jetbrains.pycharm-professional
 
 	#soc
+    slack
     zoom-us
     discord
     whatsapp-for-linux

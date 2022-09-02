@@ -71,7 +71,10 @@
  
 
 
-  virtualisation.libvirtd.enable = true;
+  virtualisation =  {
+    libvirtd.enable = true;
+    docker.enable = true;
+  };
   programs = {
     dconf.enable = true;
     nm-applet.enable = true;
@@ -81,7 +84,7 @@
   users = {
     users.ahmed = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" "libvirtd" ]; # Enable ‘sudo’ for the user.
+      extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" ]; # Enable ‘sudo’ for the user.
     };
     defaultUserShell = pkgs.fish;
   };

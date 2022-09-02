@@ -108,11 +108,11 @@
         "nixpkgs": "nixpkgs_3"
       },
       "locked": {
-        "lastModified": 1661024713,
-        "narHash": "sha256-eVOM875YvBkOLZX8GQDqo+rGRLGXy/xIJByF4NK3rw4=",
+        "lastModified": 1662146091,
+        "narHash": "sha256-6TY7+HTp7t2zfYiOTlRdU4Rdjl/RAgAmr4+TAP/ucUo=",
         "owner": "Ahmed-Jarir",
         "repo": "yt-mp",
-        "rev": "f9bd9ff449fc2c1d55c5bddf5eea830a1835d303",
+        "rev": "74cdd4fed1b4c1f8e41721cfb0e24301c4baf1ee",
         "type": "github"
       },
       "original": {
