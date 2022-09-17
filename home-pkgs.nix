@@ -18,10 +18,10 @@ in {
     ytmpMenu
 
 	#ides
-    jetbrains.clion
-    jetbrains.rider
-    jetbrains.idea-ultimate
-    jetbrains.pycharm-professional
+    # jetbrains.clion
+    # jetbrains.rider
+    # jetbrains.idea-ultimate
+    # jetbrains.pycharm-professional
 
 	#soc
     slack
@@ -39,18 +39,8 @@ in {
 	#terminals
 	kitty
 
-    #db plat
-    pgadmin4
-
     #music player
-    mpd
-    mpc-cli
-    ncmpcpp
-
-
-    #website testing
-    soapui
-    jmeter
+    cmus
 
     cool-retro-term
 
