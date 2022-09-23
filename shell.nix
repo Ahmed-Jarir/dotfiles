@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
   shellAliases = {
-      rebuild = "sudo nixos-rebuild switch --flake /home/ahmed/dotfiles/ --impure";#--install-bootloader if grub disappears
+      rebuild = "sudo nixos-rebuild switch --flake /home/ahmed/dotfiles/";
       qlog = "cat /home/ahmed/.local/share/qtile/qtile.log";
       pks = "nix search nixpkgs";
       xConf = "vim /home/ahmed/.xmonad/xmonad.hs";
@@ -67,7 +67,7 @@ in {
                 set_color --bold white -b $namebg
                 switch $fish_bind_mode
                     case default
-                        printf '  '
+                        printf '  '
                     case insert
                         printf '  '
                     case replace_one
