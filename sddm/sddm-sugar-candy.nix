@@ -1,4 +1,4 @@
-{ stdenv, fetchFromGitLab }:
+{ stdenv, fetchFromGitHub }:
 stdenv.mkDerivation rec {
   name = "sddm-sugar-candy";
   # latest master commit, no recent tags :(
@@ -8,7 +8,7 @@ stdenv.mkDerivation rec {
       cp -aR $src $out/share/sddm/themes/sugar-candy
     '';
   patches = [ ./sugar-candy-conf.patch ];
-  src = fetchFromGitLab {
+  src = fetchFromGitHub {
     owner = "Kangie";
     repo = "sddm-sugar-candy";
 

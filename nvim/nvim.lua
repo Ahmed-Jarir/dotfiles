@@ -5,7 +5,6 @@ vim.cmd [[
     set nowrap
     set noswapfile
     set noerrorbells
-
     colorscheme onehalfdark
     set backspace=indent,eol,start
     map ; :
@@ -32,7 +31,7 @@ opt.incsearch = true
 opt.hidden = true
 opt.shortmess = "A"
 
-require('neogit').setup{}
+--require('neogit').setup{}
 
 require('lualine').setup()
 
@@ -45,21 +44,21 @@ require('nvim_comment').setup({
     , comment_empty = false
     , line_mapping = "<leader>lc", operator_mapping = "<leader>c", comment_chunk_text_object = "ic"
 })
-require("transparent").setup({
-  enable = true, -- boolean: enable transparent
-  extra_groups = { -- table/string: additional groups that should be cleared
-    -- In particular, when you set it to 'all', that means all available groups
-
-    -- example of akinsho/nvim-bufferline.lua
-    "BufferLineTabClose",
-    "BufferlineBufferSelected",
-    "BufferLineFill",
-    "BufferLineBackground",
-    "BufferLineSeparator",
-    "BufferLineIndicatorSelected",
-  },
-  exclude = {}, -- table: groups you don't want to clear
-})
+-- require("transparent").setup({
+--   enable = true, -- boolean: enable transparent
+--   extra_groups = { -- table/string: additional groups that should be cleared
+--     -- In particular, when you set it to 'all', that means all available groups
+-- 
+--     -- example of akinsho/nvim-bufferline.lua
+--     "BufferLineTabClose",
+--     "BufferlineBufferSelected",
+--     "BufferLineFill",
+--     "BufferLineBackground",
+--     "BufferLineSeparator",
+--     "BufferLineIndicatorSelected",
+--   },
+--   exclude = {}, -- table: groups you don't want to clear
+-- })
 
 require'nvim-treesitter.configs'.setup{ 
     enable = true

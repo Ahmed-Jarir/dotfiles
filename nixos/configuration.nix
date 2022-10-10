@@ -1,46 +1,35 @@
-{ config, pkgs, lib, ytmp, ... }:
+{ config, pkgs, lib, ... }:
 
 {
-
   nix = {
-
-    autoOptimiseStore = true;
+    settings.auto-optimise-store = true;
     package = pkgs.nixUnstable;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
-
   };
-
   imports =
-    [
+  [
+      ./boot.nix
       ./hardware-configuration.nix
       ./packages.nix
       ./services.nix
-      ./sddm.nix
-      ./boot.nix
-    ];
-
-  nixpkgs = {
-    config.allowUnfree = true;
-    config.packageOverrides =  pkgs: rec{
-      vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
-    };
-  };
+  ];
 
   networking = {
-
-    hostName = "fg002";
+    hostName = "nixos";
     useDHCP = false;
     interfaces.eno1.useDHCP = true;
     networkmanager.enable = true;
-
   };
 
+  time.timeZone = "Europe/Istanbul";
+
+  sound.enable = true;
+   
   virtualisation =  {
 
     libvirtd.enable = true;
-    docker.enable = true;
 
   };
 
@@ -51,24 +40,23 @@
     light.enable = true;
 
   };  
-
   users = {
     users.ahmed = {
       isNormalUser = true;
-      extraGroups = [ "wheel" "networkmanager" "libvirtd" "docker" ];
+      description = "ahmed";
+      extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
     };
     defaultUserShell = pkgs.fish;
   };
-  time.timeZone = "Europe/Istanbul";
 
-
-  environment.variables = {
-
-		TERMINAL = "kitty";
-		EDITOR = "nvim";
-
+  # Allow unfree packages
+  nixpkgs = {
+    config.allowUnfree = true;
+    config.packageOverrides =  pkgs: rec{
+      vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+    };
   };
-
+   
   fonts.fonts = with pkgs; [
 
 	(nerdfonts.override { fonts = [ "FiraCode" ]; })
@@ -76,7 +64,5 @@
 
   ];
 
-  system.stateVersion = "21.11"; 
-
+  system.stateVersion = "22.05";
 }
-

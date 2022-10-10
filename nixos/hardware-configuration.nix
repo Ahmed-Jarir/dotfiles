@@ -8,53 +8,49 @@
     [ (modulesPath + "/installer/scan/not-detected.nix")
     ];
 
-
-    boot = { 
-      initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
-      initrd.kernelModules = [ ];#"amdgpu" ];
-      kernelModules = [ "kvm-amd" ];
-      #kernelParams = [
-      #  "video=eDP-1:1980x1080@165"
-      #  "video=HDMI-A-1:1980x1080@60"
-      #];
-      extraModulePackages = with config.boot.kernelPackages; [ rtw89 ];
-    };
+  boot = {
+    initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
+    initrd.kernelModules = [ ];
+    kernelModules = [ "kvm-amd" ];
+    kernelPackages = pkgs.linuxPackages_latest;
+  };
 
   fileSystems."/" =
-    { device = "/dev/disk/by-uuid/d1360a49-5445-43f5-88e5-54780efdafca";
+    { device = "/dev/disk/by-uuid/1dd39c69-2886-4b8f-b7b2-371732927966";
       fsType = "ext4";
     };
 
-  fileSystems."/boot" =
-    { device = "/dev/disk/by-uuid/F996-11F6";
+  fileSystems."/boot/efi" =
+    { device = "/dev/disk/by-uuid/6DB3-F15C";
       fsType = "vfat";
     };
 
   swapDevices =
-    [ { device = "/dev/disk/by-uuid/e61fff74-673b-4e1d-99c4-1f8b8079fa49"; }
+    [ { device = "/dev/disk/by-uuid/3df15725-1c0b-4b3e-8bda-0e45ca25a70b"; }
     ];
+
+  networking.useDHCP = lib.mkDefault true;
 
   hardware = {
     cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-    #opengl.driSupport = true;
     firmware = [ pkgs.rtw89-firmware ];
 
     opengl = {
       enable = true;
       extraPackages = with pkgs; [
-        #rocm-opencl-icd
-        #rocm-opencl-runtime
-        #amdvlk
-        vaapiIntel         # LIBVA_DRIVER_NAME=i965 (older but works better for Firefox/Chromium)
+        vaapiIntel
         libvdpau-va-gl
       ];
     };
-    nvidia.prime = {
-      offload.enable = true;
+    nvidia = { 
+      modesetting.enable = true;
+      prime = {
+        offload.enable = true;
   
-      amdgpuBusId = "PCI:5:0:0";
+        amdgpuBusId = "PCI:6:0:0";
   
-      nvidiaBusId = "PCI:1:0:0";
+        nvidiaBusId = "PCI:1:0:0";
+      };
     };
     pulseaudio.enable = false;
 	bluetooth = {

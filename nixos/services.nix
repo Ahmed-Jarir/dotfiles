@@ -1,13 +1,14 @@
 { pkgs, ... }:
 {
   services.xserver = {
-    # Enable the X11 windowing system.
-
     enable = true;
 
-    #hardware.nvidia.modesetting.enable = true;
-    videoDrivers = [ "nvidia" ]; #"amdgpu" ]; #
-    # Enable touchpad support (enabled default in most desktopManager).
+    layout = "us";
+    displayManager.gdm.enable = true;
+    displayManager.gdm.wayland = false;
+    desktopManager.gnome.enable = false;
+
+    videoDrivers = [ "nvidia" ];
     libinput = {
       enable = true;
       touchpad = {
@@ -24,9 +25,8 @@
         enable = true;
         enableContribAndExtras = true;
         extraPackages = haskellPackages: [
-          haskellPackages.xmonad-contrib_0_17_0
+          haskellPackages.xmonad-contrib
           haskellPackages.xmonad-extras
-          haskellPackages.xmonad_0_17_0
           haskellPackages.xmonad-utils
           haskellPackages.xmobar
           haskellPackages.dbus
@@ -35,15 +35,13 @@
         ];
       };
     };
+
     xkbOptions = "ctrl:nocaps";
   }; 
   console.useXkbConfig = true;
 
   services = {
-    postgresql = {
-      enable = true;
-      package = pkgs.postgresql_13;
-    };
+    printing.enable = true;
     blueman.enable = true;
     dbus.packages = with pkgs; [ blueman ];
 
@@ -86,6 +84,5 @@
    	  ];
     };
       #end of pipwire conf
-
   };
 }

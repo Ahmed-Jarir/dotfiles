@@ -1,13 +1,12 @@
 { pkgs, ... }:
 let
   shellAliases = {
-      rebuild = "sudo nixos-rebuild switch --flake /home/ahmed/dotfiles/";
+      rebuild = "sudo nixos-rebuild switch --flake /home/ahmed/dotfiles/nixos/";
       qlog = "cat /home/ahmed/.local/share/qtile/qtile.log";
       pks = "nix search nixpkgs";
       xConf = "vim /home/ahmed/.xmonad/xmonad.hs";
       qConf = "vim .config/qtile/config.py";
       nflake = "nix flake new -t github:nix-community/nix-direnv ./";
-  #	  kanji = "Documents/pr/Projects/kanji/target/debug/kanji";
   };
 in {
     programs.fish = {
@@ -21,10 +20,7 @@ in {
             set -U gitBg 'DBDFFD'
             set -U normalFontColor '000000'
             
-
             function fish_prompt
-
-
                 #set_color white -b $namebg
                 #printf ' %s ' (whoami)
                 set_color normal
@@ -57,11 +53,9 @@ in {
                         set_color $dirBg -b normal
                         printf ''
                     end
-
               end
               printf " "
             end
-
 			fish_vi_key_bindings
             function fish_mode_prompt --description 'Displays the current mode'
                 set_color --bold white -b $namebg
@@ -79,7 +73,6 @@ in {
                 end
                 set_color normal
             end
-
         '';
         plugins = [
 
