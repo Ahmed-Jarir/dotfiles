@@ -4,8 +4,6 @@ let
       rebuild = "sudo nixos-rebuild switch --flake /home/ahmed/dotfiles/nixos/";
       qlog = "cat /home/ahmed/.local/share/qtile/qtile.log";
       pks = "nix search nixpkgs";
-      xConf = "vim /home/ahmed/.xmonad/xmonad.hs";
-      qConf = "vim .config/qtile/config.py";
       nflake = "nix flake new -t github:nix-community/nix-direnv ./";
   };
 in {
