@@ -26,6 +26,7 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.ManageHelpers
+import XMonad.Util.ClickableWorkspaces
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
 --end hooks
 --layouts
@@ -91,7 +92,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm,               xK_Return), spawn $ XMonad.terminal conf)
 
     -- rofi menus
-    -- launch 
     , ((modm,               xK_p     ), spawn "rofi -show run")
 
     --power menu
@@ -285,7 +285,6 @@ myManageHook = composeAll
                   , className =? "Gxmessage"  --> doCenterFloat
                   , className =? "Gimp"           --> doFloat
                   , className =? ".blueman-manager-wrapped" --> doFloat
-                  , namedScratchpadManageHook scratchpads
                
                   , resource  =? "desktop_window" --> doIgnore
                   , resource  =? "kdesktop"       --> doIgnore 
@@ -293,7 +292,7 @@ myManageHook = composeAll
                   , className =? "kitty" --> doShift ( myWorkspaces !! 0 )
                   , className =? "Virt-manager" --> doShift ( myWorkspaces !! 5 )
                   , className =? "discord" --> doShift ( myWorkspaces !! 6 )
-                  , className =? "Whatsapp-for-linux" --> doShift ( myWorkspaces !! 6 )]
+                  , className =? "Whatsapp-for-linux" --> doShift ( myWorkspaces !! 6 )] <+> namedScratchpadManageHook scratchpads
 
 
 scratchpads = [ NS "cmus" "kitty --title music cmus" (title =? "music") (customFloating $ W.RationalRect 0.05 0.05 0.9 0.9 ) ]

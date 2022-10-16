@@ -41,6 +41,7 @@ in{
 	nodejs
     copyq
     trayer
+    btop
   ];
 
 }

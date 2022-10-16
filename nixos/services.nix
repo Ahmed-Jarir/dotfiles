@@ -48,8 +48,9 @@
 		  enable = true;
 		  allowAnyUser = true;
     };
-
+    
     #pipewire conf
+
     pipewire = {
       enable = true;
       alsa.enable = true;

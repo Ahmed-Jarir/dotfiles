@@ -59,18 +59,18 @@ keys = [
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
 
     # volume
-    Key([], "XF86AudioLowerVolume", lazy.spawn("volume-change -5")),
-    Key([], "XF86AudioRaiseVolume", lazy.spawn("volume-change +5")),
-    Key([], "XF86AudioMute", lazy.spawn("amixer set Master toggle")),
-	Key([], "XF86AudioPlay", lazy.spawn("media p")),
-	Key([], "XF86AudioPause", lazy.spawn("media p")),
-	Key([], "XF86AudioNext", lazy.spawn("media n")),
-	Key([], "XF86AudioPrev", lazy.spawn("media b")),
+	#     Key([], "XF86AudioLowerVolume", lazy.spawn("volume-change -5")),
+	#     Key([], "XF86AudioRaiseVolume", lazy.spawn("volume-change +5")),
+	#     Key([], "XF86AudioMute", lazy.spawn("amixer set Master toggle")),
+	# Key([], "XF86AudioPlay", lazy.spawn("media p")),
+	# Key([], "XF86AudioPause", lazy.spawn("media p")),
+	# Key([], "XF86AudioNext", lazy.spawn("media n")),
+	# Key([], "XF86AudioPrev", lazy.spawn("media b")),
 
-	#rofi
-    Key([mod], "s", lazy.spawn("rofi -show ssh -no-parse-known-hosts -disable-history")),
-	Key([mod], "o", lazy.spawn("powermen")),
-    Key([mod], "p", lazy.spawn("rofi -show run"), desc="use dmenu to run a command"),
+	# #rofi
+	#     Key([mod], "s", lazy.spawn("rofi -show ssh -no-parse-known-hosts -disable-history")),
+	# Key([mod], "o", lazy.spawn("powermen")),
+	#     Key([mod], "p", lazy.spawn("rofi -show run"), desc="use dmenu to run a command"),
 	
 	#screenshots
 	Key(["shift", mod], "s", lazy.function(runc, 0)),
