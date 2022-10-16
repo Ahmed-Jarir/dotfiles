@@ -206,11 +206,11 @@ bottomBar=bar.Bar(
             background = colors["mainbg"],
         ),
  
-        CurrencyConv.CurrencyConv(
-            fmt = "USD: {} TRY",
-            foreground = colors["black"],
-            background = colors["obg"],
-        ),
+        # CurrencyConv.CurrencyConv(
+        #     fmt = "USD: {} TRY",
+        #     foreground = colors["black"],
+        #     background = colors["obg"],
+        # ),
         widget.TextBox(
             "",
 			width = 17,
@@ -219,7 +219,7 @@ bottomBar=bar.Bar(
             foreground=colors["mainbg"],
             background=colors["obg"],
         ),
-        widget.CryptoTicker(),
+        widget.Clipboard(timeout = None),
     ],
 
     14,

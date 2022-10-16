@@ -24,13 +24,16 @@ class CurrencyConv(base._TextBox):
         base._TextBox._configure(self, qtile, parent_bar)
 
     def update(self):
-        url = f"https://api.exchangerate.host/convert?from={self.convert_from}&to={self.convert_to}"
-        response = req.urlopen(url).read()
-        data = json.loads(response)
+        try:
+            url = f"https://api.exchangerate.host/convert?from={self.convert_from}&to={self.convert_to}"
+            response = req.urlopen(url).read()
+            data = json.loads(response)
 
-        self.text = str(round(data["result"], self.precision))
+            self.text = str(round(data["result"], self.precision))
 
-        self.bar.draw()
+            self.bar.draw()
+        except ConnectionException:
+            pass
 
     def timer_setup(self):
         self.update()

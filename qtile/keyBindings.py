@@ -57,7 +57,6 @@ keys = [
 	#Key([mod, "control"], "r",lazy.reload_config(), desc="Reload the config"),
 	Key([mod, "control"], "r",lazy.restart(), desc="Restart Qtile"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "p", lazy.spawn("dmenu_run"), desc="use dmenu to run a command"),
 
     # volume
     Key([], "XF86AudioLowerVolume", lazy.spawn("volume-change -5")),
@@ -71,15 +70,15 @@ keys = [
 	#rofi
     Key([mod], "s", lazy.spawn("rofi -show ssh -no-parse-known-hosts -disable-history")),
 	Key([mod], "o", lazy.spawn("powermen")),
-    Key([mod], "d", lazy.spawn("ytmpMenu")),
-
+    Key([mod], "p", lazy.spawn("rofi -show run"), desc="use dmenu to run a command"),
 	
 	#screenshots
-	Key(["shift", mod], "s", lazy.function(runc,0)),
-	Key(["shift", mod], "a", lazy.function(runc,1)),
+	Key(["shift", mod], "s", lazy.function(runc, 0)),
+	Key(["shift", mod], "a", lazy.function(runc, 1)),
 
+	# Key([mod], "x", lazy.function(runc, 2)),
     Key([mod], 'm', lazy.group['scratchpad'].dropdown_toggle('cmus')),
-    # Key([mod, "shift"], 't', lazy.group['scratchpad'].dropdown_toggle('term')),
+    Key([mod, "shift"], 't', lazy.group['scratchpad'].dropdown_toggle('term')),
 ]
 ##end keys##	
 ##mouse key bindings##

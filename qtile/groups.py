@@ -7,7 +7,7 @@ groups = [
 
     Group("SYS", spawn=terminal, layout="bsp"),
     Group("NET", spawn="google-chrome-stable"),
-    Group("UNI", spawn="nautilus Documents/pr/uni"),
+    Group("UNI", spawn="nautilus"),
     Group("DOC"),
     Group("GDV", spawn="unityhub",matches=[Match(wm_class=["unityhub","Unity"])],layout="treetab"),
     Group("VRM", spawn="virt-manager",matches=[Match(wm_class=["virt-manager"])]),
@@ -16,9 +16,9 @@ groups = [
 	Group("ANI"),
     ScratchPad("scratchpad", [
         DropDown("cmus", "kitty cmus", opacity=0.97),
+        DropDown("term", "kitty", opacity=0.97),
     ]),
     # ScratchPad("scratchpad", [
-    #     DropDown("term", "kitty", opacity=0.97),
     # ]),
 
 ]

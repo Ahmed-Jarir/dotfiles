@@ -40,6 +40,7 @@ in {
   imports = [ 
     ./shell.nix 
     ./home-pkgs.nix
+    ./sysdservices.nix
   ];
 
   home.stateVersion = "22.05";

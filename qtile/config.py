@@ -46,6 +46,7 @@ def autostart():
     sp.Popen(["notify-osd"])
     sp.Popen(["blueman-applet"])
     sp.Popen(["compton"])
+    sp.Popen(["copyq"])
 
 
 screens = [

@@ -43,6 +43,7 @@ floating_layout = layout.Floating(
         Match(wm_class=".blueman-manager-wrapped"),
         Match(wm_class="zoom"),
         Match(wm_class="Gxmessage"),
+        Match(wm_class="CopyQ"),
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
     ]

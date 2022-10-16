@@ -86,8 +86,8 @@ in {
     # gui tools
     rofi
     dmenu
-    xmobar
     polybar
+    xmobar
     gxmessage
     notify-osd
     stalonetray
@@ -107,7 +107,6 @@ in {
     picom 
     git-lfs
     ripgrep
-    nitrogen
     dotnet-sdk
     alsa-utils
     python3
@@ -124,6 +123,5 @@ in {
     font-awesome
 
     # libsForQt5.qt5.qtgraphicaleffects
-
   ];
 }

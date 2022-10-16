@@ -28,7 +28,6 @@
           haskellPackages.xmonad-contrib
           haskellPackages.xmonad-extras
           haskellPackages.xmonad-utils
-          haskellPackages.xmobar
           haskellPackages.dbus
           haskellPackages.List
           haskellPackages.monad-logger

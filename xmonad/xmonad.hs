@@ -81,6 +81,7 @@ clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
 myNormalBorderColor  = "#dddddd"
 myFocusedBorderColor = "#ff0000"
 
+--scratchpads
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
 --
@@ -89,21 +90,17 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch a terminal
     [ ((modm,               xK_Return), spawn $ XMonad.terminal conf)
 
-    -- dmenus
-    --
-    -- launch dmenu
-    , ((modm,               xK_p     ), spawn "dmenu_run")
+    -- rofi menus
+    -- launch 
+    , ((modm,               xK_p     ), spawn "rofi -show run")
 
-    --power dmenu
+    --power menu
     , ((modm,               xK_o     ), spawn "powermen")
 
-    -- ssh dmenu
+    -- ssh menu
     , ((modm,               xK_s     ), spawn "rofi -show ssh -no-parse-known-hosts -disable-history")
-
-    --ytmp dmenu
-    , ((modm,               xK_d     ), spawn "ytmpMenu")
-
-    --end dmenus
+    --end rofi menus
+    , ((modm .|. shiftMask, xK_m     ), namedScratchpadAction scratchpads "cmus")
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
@@ -163,7 +160,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
 
     -- Restart xmonad
-    , ((modm              , xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+    , ((modm              , xK_q     ), spawn "pkill xmobar; pkill trayer; xmonad --recompile; xmonad --restart")
     
     --volume keys
     , ((0              , xF86XK_AudioRaiseVolume), spawn "volume-change +5")
@@ -282,19 +279,24 @@ myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
 -- 'className' and 'resource' are used below.
 --
 myManageHook = composeAll
-    [ className =? "MPlayer"        --> doFloat
-    , className =? "Gxmessage"  --> doCenterFloat
-    , className =? "Gimp"           --> doFloat
+                  [
+                  isFullscreen --> doFullFloat
+                  , className =? "MPlayer"        --> doFloat
+                  , className =? "Gxmessage"  --> doCenterFloat
+                  , className =? "Gimp"           --> doFloat
+                  , className =? ".blueman-manager-wrapped" --> doFloat
+                  , namedScratchpadManageHook scratchpads
+               
+                  , resource  =? "desktop_window" --> doIgnore
+                  , resource  =? "kdesktop"       --> doIgnore 
+               
+                  , className =? "kitty" --> doShift ( myWorkspaces !! 0 )
+                  , className =? "Virt-manager" --> doShift ( myWorkspaces !! 5 )
+                  , className =? "discord" --> doShift ( myWorkspaces !! 6 )
+                  , className =? "Whatsapp-for-linux" --> doShift ( myWorkspaces !! 6 )]
 
-    , resource  =? "desktop_window" --> doIgnore
-    , resource  =? "kdesktop"       --> doIgnore 
 
-    , className =? "kitty" --> doShift ( myWorkspaces !! 0 )
-    , className =? "Virt-manager" --> doShift ( myWorkspaces !! 5 )
-    , className =? "discord" --> doShift ( myWorkspaces !! 6 )
-    , className =? "Whatsapp-for-linux" --> doShift ( myWorkspaces !! 6 )
-    ]
-
+scratchpads = [ NS "cmus" "kitty --title music cmus" (title =? "music") (customFloating $ W.RationalRect 0.05 0.05 0.9 0.9 ) ]
 ------------------------------------------------------------------------
 -- Event handling
 
@@ -323,7 +325,6 @@ myEventHook = mempty
 --
 -- By default, do nothing.
 myStartupHook = do
-    spawnOnce "nitrogen --restore &"
     spawnOnce "blueman-applet &"
     spawnOnce "virt-manager &"
     spawnOnce "notify-osd &"
@@ -337,16 +338,19 @@ myStartupHook = do
 -- Run xmonad with the settings you specify. No need to modify this.
 --
 --
+--
+
 myLogHook :: Handle -> X ()
 myLogHook h = dynamicLogWithPP $ def  { ppOutput = hPutStrLn h }
 
 main = do 
 
-    xmproc0 <- spawnPipeWithUtf8Encoding "xmobar /home/ahmed/.xmonad/xmobar.config"
-    xmproc1 <- spawnPipeWithUtf8Encoding "xmobar /home/ahmed/.xmonad/xmobarBottom.config"
-    --xmonad defaults
+    xmproc0 <- spawnPipe "xmobar -x 0 ~/dotfiles/xmonad/xmobar.config"
+    xmproc1 <- spawnPipe "xmobar -x 0 ~/dotfiles/xmonad/xmobarBottom.config"
+    xmproc2 <- spawnPipe "trayer --align right --widthtype request --edge bottom --height 18 --tint 0x1B2430 --transparent true --alpha 0"
 
-    xmonad $ fullscreenSupport $ ewmh $ docks $ defaults {
+
+    xmonad $ ewmhFullscreen $ ewmh $ docks defaults {
         logHook = dynamicLogWithPP $ xmobarPP
         { ppOutput = \x -> hPutStrLn xmproc0 x 
             , ppCurrent = xmobarColor "#D6D5A8" "" . wrap ("<box type=Bottom width=2 mt=2 color=" ++ "#D6D5A8" ++ ">")"</box>"
@@ -398,7 +402,7 @@ defaults = def {
 
       -- hooks, layouts
         layoutHook         = myLayout,
-        manageHook         = myManageHook,
+        manageHook         = myManageHook <+> manageDocks,
         handleEventHook    = myEventHook,
         logHook            = return(),
         startupHook        = myStartupHook
