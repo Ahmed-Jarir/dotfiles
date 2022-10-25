@@ -94,7 +94,6 @@ in {
     qutebrowser
     foxitreader
     libreoffice
-    google-chrome
     gnome.nautilus
 
 

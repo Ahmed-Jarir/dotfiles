@@ -6,15 +6,11 @@
 --
 -- Normally, you'd only override those defaults you care about.
 --
-
 import XMonad
 import System.IO
 import System.Exit
-import XMonad.Util.Run
-import XMonad.Util.SpawnOnce
 import XMonad.Actions.CycleWS
 import Codec.Binary.UTF8.String
-import XMonad.Util.NamedScratchpad
 import Graphics.X11.ExtraTypes.XF86
 
 import qualified Data.Map        as M
@@ -26,16 +22,27 @@ import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.StatusBar.PP
 import XMonad.Hooks.ManageHelpers
-import XMonad.Util.ClickableWorkspaces
 import XMonad.Hooks.DynamicLog (dynamicLogWithPP, wrap, xmobarPP, xmobarColor, shorten, PP(..))
 --end hooks
+
+--utils
+import XMonad.Util.Run
+import XMonad.Util.Cursor
+import XMonad.Util.SpawnOnce
+import XMonad.Util.NamedScratchpad
+import XMonad.Util.ClickableWorkspaces
+--end utils
+
 --layouts
-import XMonad.Layout.Fullscreen
 import XMonad.Layout.Spacing
+import XMonad.Layout.Fullscreen
+import XMonad.Layout.ToggleLayouts
 --end layouts
+
 --Data
 import Data.Monoid
-import Data.Maybe (fromJust)
+import Data.Maybe (fromJust, isJust)
+
 --end Data
 
 -- The preferred terminal program, which is used in a binding below and by
@@ -72,7 +79,7 @@ myModMask       = mod4Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["1: DEV","2: NET","3: UNI","4: DOC","5: GDV","6: VRM","7: CHT","8: MUS","9: VID"]
+myWorkspaces    = zipWith (++) (map show [1..]) (map (": " ++) ["DEV","NET","UNI","DOC","GDV","VRM","CHT","MUS","VID"])
 myWorkspaceIndices = M.fromList $ zipWith (,) myWorkspaces [1..]
 
 clickable ws = "<action=xdotool key super+"++show i++">"++ws++"</action>"
@@ -101,6 +108,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     , ((modm,               xK_s     ), spawn "rofi -show ssh -no-parse-known-hosts -disable-history")
     --end rofi menus
     , ((modm .|. shiftMask, xK_m     ), namedScratchpadAction scratchpads "cmus")
+    , ((modm .|. shiftMask, xK_t     ), namedScratchpadAction scratchpads "term")
 
     -- close focused window
     , ((modm .|. shiftMask, xK_c     ), kill)
@@ -155,6 +163,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- See also the statusBar function from Hooks.DynamicLog.
     --
     -- , ((modm              , xK_b     ), sendMessage ToggleStruts)
+    --
+    -- , ((modm              , xK_f     ), sendMessage (Toggle "Full"))
 
     -- Quit xmonad
     , ((modm .|. shiftMask, xK_q     ), io (exitWith ExitSuccess))
@@ -294,8 +304,12 @@ myManageHook = composeAll
                   , className =? "discord" --> doShift ( myWorkspaces !! 6 )
                   , className =? "Whatsapp-for-linux" --> doShift ( myWorkspaces !! 6 )] <+> namedScratchpadManageHook scratchpads
 
-
-scratchpads = [ NS "cmus" "kitty --title music cmus" (title =? "music") (customFloating $ W.RationalRect 0.05 0.05 0.9 0.9 ) ]
+scratchpads = [
+                NS "cmus" "kitty --title music cmus" (title =? "music") nsDim 
+                , NS "term" "kitty --title terminal" (title =? "terminal") nsDim 
+              ]
+    where
+        nsDim = customFloating $ W.RationalRect 0.05 0.05 0.9 0.9
 ------------------------------------------------------------------------
 -- Event handling
 
@@ -307,37 +321,15 @@ scratchpads = [ NS "cmus" "kitty --title music cmus" (title =? "music") (customF
 --
 myEventHook = mempty
 
-------------------------------------------------------------------------
--- Status bars and logging
-
--- Perform an arbitrary action on each internal state change or X event.
--- See the 'XMonad.Hooks.DynamicLog' extension for examples.
---
 --myLogHook = return() 
-
-------------------------------------------------------------------------
--- Startup hook
-
--- Perform an arbitrary action each time xmonad starts or is restarted
--- with mod-q.  Used by, e.g., XMonad.Layout.PerWorkspace to initialize
--- per-workspace layout choices.
---
--- By default, do nothing.
 myStartupHook = do
+    setDefaultCursor xC_left_ptr
     spawnOnce "blueman-applet &"
     spawnOnce "virt-manager &"
     spawnOnce "notify-osd &"
     spawnOnce "discord &"
     spawnOnce "compton &"
     spawnOnce "kitty &"
-
-------------------------------------------------------------------------
--- Now run xmonad with all the defaults we set up.
-
--- Run xmonad with the settings you specify. No need to modify this.
---
---
---
 
 myLogHook :: Handle -> X ()
 myLogHook h = dynamicLogWithPP $ def  { ppOutput = hPutStrLn h }
@@ -350,21 +342,15 @@ main = do
 
 
     xmonad $ ewmhFullscreen $ ewmh $ docks defaults {
-        logHook = dynamicLogWithPP $ xmobarPP
+        logHook = dynamicLogWithPP $ filterOutWsPP [scratchpadWorkspaceTag] $ xmobarPP
         { ppOutput = \x -> hPutStrLn xmproc0 x 
             , ppCurrent = xmobarColor "#D6D5A8" "" . wrap ("<box type=Bottom width=2 mt=2 color=" ++ "#D6D5A8" ++ ">")"</box>"
             , ppVisible = xmobarColor "#F6E3C5" "" . clickable
             , ppHidden = xmobarColor  "#F6E3C5" "" . clickable
+            , ppVisibleNoWindows = Just (xmobarColor "#51557E" "" . clickable)
             , ppHiddenNoWindows = xmobarColor "#51557E" "" . clickable
             , ppUrgent = xmobarColor "#C4001D" "" . wrap "!""!"
-              -- Visible but not current workspace
-              -- Hidden workspace
-              -- Hidden workspaces (no windows)
-              -- Title of active window
-              -- Separator character
             , ppSep =  "<fn=1> | </fn>"
-              -- Urgent workspace
-              -- order of things in xmobar
             , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]
             , ppTitle = xmobarColor "#B4FF9F" "" 
 

@@ -22,6 +22,7 @@ pkgs:
 
     #eye candy
     onehalf
+    dashboard-nvim
     lualine-nvim
     nvim-web-devicons
     (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))

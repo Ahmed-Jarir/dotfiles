@@ -219,7 +219,6 @@ bottomBar=bar.Bar(
             foreground=colors["mainbg"],
             background=colors["obg"],
         ),
-        widget.Clipboard(timeout = None),
     ],
 
     14,

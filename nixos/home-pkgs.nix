@@ -42,6 +42,13 @@ in{
     copyq
     trayer
     btop
+    openconnect
+    racket
+
+    neovide
+
+    brave
+    google-chrome
   ];
 
 }
