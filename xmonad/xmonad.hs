@@ -291,11 +291,13 @@ myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
 myManageHook = composeAll
                   [
                   isFullscreen --> doFullFloat
-                  , className =? "MPlayer"        --> doFloat
-                  , className =? "Gxmessage"  --> doCenterFloat
-                  , className =? "Gimp"           --> doFloat
+                  , className =? "MPlayer"                  --> doFloat
+                  , className =? "Gimp"                     --> doFloat
                   , className =? ".blueman-manager-wrapped" --> doFloat
                
+                  , className =? "zoom"                     --> doCenterFloat
+                  , className =? "Gxmessage"                --> doCenterFloat
+
                   , resource  =? "desktop_window" --> doIgnore
                   , resource  =? "kdesktop"       --> doIgnore 
                
@@ -326,19 +328,19 @@ myStartupHook = do
     setDefaultCursor xC_left_ptr
     spawnOnce "blueman-applet &"
     spawnOnce "virt-manager &"
-    spawnOnce "notify-osd &"
     spawnOnce "discord &"
     spawnOnce "compton &"
     spawnOnce "kitty &"
+    spawnOnce "dunst &"
 
 myLogHook :: Handle -> X ()
 myLogHook h = dynamicLogWithPP $ def  { ppOutput = hPutStrLn h }
 
 main = do 
 
-    xmproc0 <- spawnPipe "xmobar -x 0 ~/dotfiles/xmonad/xmobar.config"
-    xmproc1 <- spawnPipe "xmobar -x 0 ~/dotfiles/xmonad/xmobarBottom.config"
-    xmproc2 <- spawnPipe "trayer --align right --widthtype request --edge bottom --height 18 --tint 0x1B2430 --transparent true --alpha 0"
+    xmproc0 <- spawnPipe "xmobar -x 0 ~/dotfiles/xmonad/xmobart.config"
+    xmproc1 <- spawnPipe "xmobar -x 0 ~/dotfiles/xmonad/xmobarb.config"
+    xmproc2 <- spawnPipe "sleep 2; trayer --align right --widthtype request --edge bottom --height 18 --tint 0x1B2430 --transparent true --alpha 0"
 
 
     xmonad $ ewmhFullscreen $ ewmh $ docks defaults {
@@ -348,7 +350,7 @@ main = do
             , ppVisible = xmobarColor "#F6E3C5" "" . clickable
             , ppHidden = xmobarColor  "#F6E3C5" "" . clickable
             , ppVisibleNoWindows = Just (xmobarColor "#51557E" "" . clickable)
-            , ppHiddenNoWindows = xmobarColor "#51557E" "" . clickable
+            , ppHiddenNoWindows = xmobarColor "#51557E" ""
             , ppUrgent = xmobarColor "#C4001D" "" . wrap "!""!"
             , ppSep =  "<fn=1> | </fn>"
             , ppOrder  = \(ws:l:t:ex) -> [ws,l]++ex++[t]

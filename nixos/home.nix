@@ -42,21 +42,24 @@ in {
   };
   #end configs#
   services = {
-    sxhkd ={ 
+    dunst = {
       enable = true;
-      keybindings = {
-        "XF86AudioMute" = "amixer set Master toggle";
-        "XF86AudioRaiseVolume" = "volume-change +5";
-        "XF86AudioLowerVolume" = "volume-change -5"; 
-        "XF86AudioPlay" = "media p";
-        "XF86AudioPause" = "media p";
-        "XF86AudioNext" = "media n";
-        "XF86AudioPrev" = "media b";
-        "super + s" = "rofi -show ssh -no-parse-known-hosts -disable-history";
-        "super + o" = "powermen";
-        "super + p" = "rofi -show run";
-      };
     };
+    # sxhkd = {
+    #   enable = false;
+      # keybindings = {
+      #   "XF86AudioMute" = "amixer set Master toggle";
+      #   "XF86AudioRaiseVolume" = "volume-change +5";
+      #   "XF86AudioLowerVolume" = "volume-change -5";
+      #   "XF86AudioPlay" = "media p";
+      #   "XF86AudioPause" = "media p";
+      #   "XF86AudioNext" = "media n";
+      #   "XF86AudioPrev" = "media b";
+      #   "super + s" = "rofi -show ssh -no-parse-known-hosts -disable-history";
+      #   "super + o" = "powermen";
+      #   "super + p" = "rofi -show run";
+      # };
+    # };
   };
 
   home.stateVersion = "22.05";

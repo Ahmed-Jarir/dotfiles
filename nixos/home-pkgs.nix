@@ -29,8 +29,8 @@ in{
     #game dev 
     unityhub
     
-    # #art 
-    # gimp
+    #art
+    gimp
     # blender
     
     #music player
@@ -49,6 +49,9 @@ in{
 
     brave
     google-chrome
+
+
+    libnotify
   ];
 
 }

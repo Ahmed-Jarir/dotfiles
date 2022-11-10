@@ -89,7 +89,6 @@ in {
     polybar
     xmobar
     gxmessage
-    notify-osd
     stalonetray
     qutebrowser
     foxitreader

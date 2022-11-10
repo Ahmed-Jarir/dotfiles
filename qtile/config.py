@@ -43,8 +43,8 @@ from bars import *
 #    send_notification("popup_test_1", "this is test #1")
 @hook.subscribe.startup_once
 def autostart():
-    sp.Popen(["notify-osd"])
     sp.Popen(["blueman-applet"])
+    sp.Popen(["notify-osd"])
     sp.Popen(["compton"])
     sp.Popen(["copyq"])
 
