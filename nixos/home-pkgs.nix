@@ -38,7 +38,6 @@ in{
     
     # cool-retro-term
 
-	nodejs
     copyq
     trayer
     btop
@@ -46,6 +45,9 @@ in{
     racket
 
     neovide
+
+    nodejs
+    yarn
 
     brave
     google-chrome

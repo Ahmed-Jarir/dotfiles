@@ -19,6 +19,7 @@ pkgs:
 
     neogit
     vim-kitty-navigator
+    markdown-preview-nvim
 
     #eye candy
     onehalf

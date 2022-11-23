@@ -115,7 +115,6 @@ in {
     # vim
     vim
     clang
-    nodejs
 
     # fonts 
     font-awesome

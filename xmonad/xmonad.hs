@@ -37,6 +37,8 @@ import XMonad.Util.ClickableWorkspaces
 import XMonad.Layout.Spacing
 import XMonad.Layout.Fullscreen
 import XMonad.Layout.ToggleLayouts
+import XMonad.Layout.Tabbed (simpleTabbed)
+import XMonad.Layout.Grid (Grid(..))
 --end layouts
 
 --Data
@@ -99,10 +101,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     [ ((modm,               xK_Return), spawn $ XMonad.terminal conf)
 
     -- rofi menus
-    , ((modm,               xK_p     ), spawn "rofi -show run")
+    , ((modm,               xK_o     ), spawn "rofi -show run")
 
     --power menu
-    , ((modm,               xK_o     ), spawn "powermen")
+    , ((modm,               xK_p     ), spawn "powermen")
 
     -- ssh menu
     , ((modm,               xK_s     ), spawn "rofi -show ssh -no-parse-known-hosts -disable-history")
@@ -258,57 +260,37 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- which denotes layout choice.
 --
 layoutSpacing i = spacingRaw False (Border 0 i 0 i) True (Border i 0 i 0) True
-myLayout = avoidStruts (tiled ||| Mirror tiled ||| Full)
+myLayout = avoidStruts (tiled ||| tabbed ||| grid)
   where
-     -- eefault tiling algorithm partitions the screen into two panes
-     tiled   = layoutSpacing 10 $ Tall nmaster delta ratio 
+    tabbed = layoutSpacing 10 $ simpleTabbed
+    grid   = layoutSpacing 10 $ Grid
+    tiled  = layoutSpacing 10 $ Tall nmaster delta ratio
+    nmaster= 1
+    ratio  = 1/2
+    delta  = 1/100
 
-     -- The default number of windows in the master pane
-     nmaster = 1
-
-     -- Default proportion of screen occupied by master pane
-     ratio   = 1/2
-
-     -- Percent of screen to increment by when resizing panes
-     delta   = 3/100
-
-     -- Full = layoutSpacing 10 
 ------------------------------------------------------------------------
--- Window rules:
 
--- Execute arbitrary actions and WindowSet manipulations when managing
--- a new window. You can use this to, for example, always float a
--- particular program, or have a client always appear on a particular
--- workspace.
---
--- To find the property name associated with a program, use
--- > xprop | grep WM_CLASS
--- and click on the client you're interested in.
---
--- To match on the WM_NAME, you can use 'title' in the same way that
--- 'className' and 'resource' are used below.
---
 myManageHook = composeAll
                   [
                   isFullscreen --> doFullFloat
                   , className =? "MPlayer"                  --> doFloat
                   , className =? "Gimp"                     --> doFloat
                   , className =? ".blueman-manager-wrapped" --> doFloat
-               
+
                   , className =? "zoom"                     --> doCenterFloat
                   , className =? "Gxmessage"                --> doCenterFloat
 
-                  , resource  =? "desktop_window" --> doIgnore
-                  , resource  =? "kdesktop"       --> doIgnore 
-               
-                  , className =? "kitty" --> doShift ( myWorkspaces !! 0 )
-                  , className =? "Virt-manager" --> doShift ( myWorkspaces !! 5 )
-                  , className =? "discord" --> doShift ( myWorkspaces !! 6 )
-                  , className =? "Whatsapp-for-linux" --> doShift ( myWorkspaces !! 6 )] <+> namedScratchpadManageHook scratchpads
+                  , resource  =? "desktop_window"           --> doIgnore
+                  , resource  =? "kdesktop"                 --> doIgnore
+
+                  , className =? "Virt-manager"             --> doShift ( myWorkspaces !! 5 )
+                  , className =? "discord"                  --> doShift ( myWorkspaces !! 6 )
+                  , className =? "Whatsapp-for-linux"       --> doShift ( myWorkspaces !! 6 )] <+> namedScratchpadManageHook scratchpads
 
 scratchpads = [
-                NS "cmus" "kitty --title music cmus" (title =? "music") nsDim 
-                , NS "term" "kitty --title terminal" (title =? "terminal") nsDim 
+                  NS "cmus" "kitty --title music cmus" (title =? "music") nsDim
+                , NS "term" "kitty --title terminal" (title =? "terminal") nsDim
               ]
     where
         nsDim = customFloating $ W.RationalRect 0.05 0.05 0.9 0.9
@@ -361,17 +343,6 @@ main = do
  
     }
 
-
-    
-
-
-
--- A structure containing your configuration settings, overriding
--- fields in the default config. Any you don't override, will
--- use the defaults defined in xmonad/XMonad/Config.hs
---
--- No need to modify this.
---
 defaults = def {
       -- simple stuff
         terminal           = myTerminal,
