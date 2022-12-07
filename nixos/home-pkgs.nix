@@ -17,14 +17,13 @@ in{
     #ides
     # jetbrains.clion
     # jetbrains.rider
-    # jetbrains.idea-ultimate
+    jetbrains.idea-ultimate
     # jetbrains.pycharm-professional
 
     #soc
     slack
     zoom-us
     discord
-    whatsapp-for-linux
 
     #game dev 
     unityhub
@@ -41,7 +40,6 @@ in{
     copyq
     trayer
     btop
-    openconnect
     racket
 
     neovide
@@ -50,7 +48,7 @@ in{
     yarn
 
     brave
-    google-chrome
+    # google-chrome
 
 
     libnotify

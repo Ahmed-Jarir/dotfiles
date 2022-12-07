@@ -91,7 +91,7 @@ in {
     gxmessage
     stalonetray
     qutebrowser
-    foxitreader
+    # foxitreader
     libreoffice
     gnome.nautilus
 
@@ -114,7 +114,7 @@ in {
 
     # vim
     vim
-    clang
+    # clang
 
     # fonts 
     font-awesome

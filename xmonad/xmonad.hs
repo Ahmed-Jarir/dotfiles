@@ -278,6 +278,7 @@ myManageHook = composeAll
                   , className =? "Gimp"                     --> doFloat
                   , className =? ".blueman-manager-wrapped" --> doFloat
 
+                  , className =? "Login"                    --> doCenterFloat
                   , className =? "zoom"                     --> doCenterFloat
                   , className =? "Gxmessage"                --> doCenterFloat
 
