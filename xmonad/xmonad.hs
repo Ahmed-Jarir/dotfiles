@@ -100,15 +100,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- launch a terminal
     [ ((modm,               xK_Return), spawn $ XMonad.terminal conf)
 
-    -- rofi menus
-    , ((modm,               xK_o     ), spawn "rofi -show run")
-
-    --power menu
-    , ((modm,               xK_p     ), spawn "powermen")
-
-    -- ssh menu
-    , ((modm,               xK_s     ), spawn "rofi -show ssh -no-parse-known-hosts -disable-history")
-    --end rofi menus
     , ((modm .|. shiftMask, xK_m     ), namedScratchpadAction scratchpads "cmus")
     , ((modm .|. shiftMask, xK_t     ), namedScratchpadAction scratchpads "term")
 
@@ -173,30 +164,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     -- Restart xmonad
     , ((modm              , xK_q     ), spawn "pkill xmobar; pkill trayer; xmonad --recompile; xmonad --restart")
-    
-    --volume keys
-    , ((0              , xF86XK_AudioRaiseVolume), spawn "volume-change +5")
 
-    , ((0              , xF86XK_AudioLowerVolume), spawn "volume-change -5")
-
-    , ((0              , xF86XK_AudioMute), spawn "amixer set Master toggle")
-
-    --media keys
-    --play
-    , ((0               , xF86XK_AudioPlay), spawn "media p")
-    --pause
-    , ((0               , xF86XK_AudioStop), spawn "media p")
-    --next
-    , ((0               , xF86XK_AudioNext), spawn "media n")
-    --previous
-    , ((0               , xF86XK_AudioPrev), spawn "media b")
-
-    --brightnesskeys
-
-
-    --xclip
-
-    , ((modm .|. shiftMask, xK_s), spawn "maim -s -o -D -u | xclip -selection clipboard -t image/png")
     -- Run xmessage with a summary of the default keybindings (useful for beginners)
     , ((modm .|. shiftMask, xK_slash ), spawn ("echo \"" ++ help ++ "\" | gxmessage -file -"))
     ]
@@ -315,6 +283,7 @@ myStartupHook = do
     spawnOnce "compton &"
     spawnOnce "kitty &"
     spawnOnce "dunst &"
+    spawnOnce "sxhkd &"
 
 myLogHook :: Handle -> X ()
 myLogHook h = dynamicLogWithPP $ def  { ppOutput = hPutStrLn h }

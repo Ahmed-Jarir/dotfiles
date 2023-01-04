@@ -93,16 +93,14 @@ topBar=bar.Bar(
         )
 bottomBar=bar.Bar(
     [
-        Volume(
+        widget.Volume(
             fmt = "Vol: {}",
-            unmute_format = "{volume}% [on]",
-            mute_format = "{volume}% [off]",
+            # unmute_format = "{volume}% [on]",
+            # mute_format = "{volume}% [off]",
 			padding = 8,
             background = colors["mainbg"],
             foreground = colors["fg"],
             step = 5,
-            mute_text = "",
-            unmute_text = "",
         ),
 
         widget.TextBox(

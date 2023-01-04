@@ -49,21 +49,22 @@ in {
     dunst = {
       enable = true;
     };
-    # sxhkd = {
-    #   enable = false;
-      # keybindings = {
-      #   "XF86AudioMute" = "amixer set Master toggle";
-      #   "XF86AudioRaiseVolume" = "volume-change +5";
-      #   "XF86AudioLowerVolume" = "volume-change -5";
-      #   "XF86AudioPlay" = "media p";
-      #   "XF86AudioPause" = "media p";
-      #   "XF86AudioNext" = "media n";
-      #   "XF86AudioPrev" = "media b";
-      #   "super + s" = "rofi -show ssh -no-parse-known-hosts -disable-history";
-      #   "super + o" = "powermen";
-      #   "super + p" = "rofi -show run";
-      # };
-    # };
+    sxhkd = {
+      enable = true;
+      keybindings = {
+        "XF86AudioMute"        = "amixer set Master toggle";
+        "XF86AudioRaiseVolume" = "volume-change +5";
+        "XF86AudioLowerVolume" = "volume-change -5";
+        "XF86AudioPlay"        = "media p";
+        "XF86AudioPause"       = "media p";
+        "XF86AudioNext"        = "media n";
+        "XF86AudioPrev"        = "media b";
+        "super + s"            = "rofi -show ssh -no-parse-known-hosts -disable-history";
+        "super + p"            = "powermen";
+        "super + o"            = "rofi -show run";
+        "super + shift + s"    = "maim -s -o -D -u | xclip -selection clipboard -t image/png";
+      };
+    };
   };
 
   home.stateVersion = "22.05";

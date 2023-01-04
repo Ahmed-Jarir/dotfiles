@@ -39,14 +39,13 @@ from layouts import *
 from bars import * 
 ##functions##
 
-#def popup_test(qtile):
-#    send_notification("popup_test_1", "this is test #1")
 @hook.subscribe.startup_once
 def autostart():
     sp.Popen(["blueman-applet"])
-    sp.Popen(["notify-osd"])
-    sp.Popen(["compton"])
+    sp.Popen(["dunst"])
+    sp.Popen(["picom"])
     sp.Popen(["copyq"])
+    sp.Popen(["sxhkd"])
 
 
 screens = [
@@ -57,14 +56,6 @@ screens = [
         wallpaper_mode="fill",
     ),
 ]
-
-
-
-
-
-
-
-
 
 auto_fullscreen = True
 focus_on_window_activation = "smart"
