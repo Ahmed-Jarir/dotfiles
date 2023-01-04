@@ -93,8 +93,6 @@ in {
     qutebrowser
     # foxitreader
     libreoffice
-    gnome.nautilus
-
 
 
     # tools

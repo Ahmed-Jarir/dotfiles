@@ -13,10 +13,8 @@ in {
       enable = true;
       enableBashIntegration = true;
     };
-    eclipse = {
-      enable = true;
-      # package = pkgs.eclipses.eclipse-java;
-    };
+    
+    # thunar.enable = true;
   };
   imports = [ 
     ./shell.nix 

@@ -52,6 +52,7 @@ in{
 
 
     libnotify
+    xfce.thunar
   ];
 
 }

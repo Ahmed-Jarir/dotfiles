@@ -79,6 +79,12 @@ require'nvim-treesitter.configs'.setup{
 
 require('telescope').setup{}
 
+-- if exists("g:neovide")
+g.neovide_scale_factor = 0.5
+g.neovide_transparency = 0.54
+g.transparency = 0.9
+g.neovide_background_color = '#222330'..math.floor(255 * g.transparency)
+-- endif
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', 'ff', builtin.find_files, {})
 vim.keymap.set('n', 'fg', builtin.live_grep, {})
