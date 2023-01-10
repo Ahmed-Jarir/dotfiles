@@ -292,7 +292,7 @@ main = do
 
     xmproc0 <- spawnPipe "xmobar -x 0 ~/dotfiles/xmonad/xmobart.config"
     xmproc1 <- spawnPipe "xmobar -x 0 ~/dotfiles/xmonad/xmobarb.config"
-    xmproc2 <- spawnPipe "sleep 2; trayer --align right --widthtype request --edge bottom --height 18 --tint 0x1B2430 --transparent true --alpha 0"
+    xmproc2 <- spawnPipe "sleep 2; trayer --align right --widthtype request --edge bottom --height 16 --tint 0x1B2430 --transparent true --alpha 0"
 
 
     xmonad $ ewmhFullscreen $ ewmh $ docks defaults {

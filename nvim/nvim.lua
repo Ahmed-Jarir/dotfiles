@@ -1,7 +1,7 @@
 local opt = vim.opt
 local g = vim.g
 
-vim.cmd [[
+vim.cmd [[ 
     set nowrap
     set ignorecase
     set noswapfile
@@ -14,7 +14,29 @@ vim.cmd [[
     map ; :
 ]]
 
+
 g.mapleader = ' '
+if g.neovide then
+    g.neovide_scale_factor = 0.5
+    g.neovide_transparency = 0.94
+    g.transparency = 0.0
+    g.neovide_background_color = '#222330'..math.floor(255 * g.neovide_transparency)
+
+else
+    require("transparent").setup({
+      enable = true,
+      extra_groups = 
+      { 
+        "BufferLineTabClose",
+        "BufferlineBufferSelected",
+        "BufferLineFill",
+        "BufferLineBackground",
+        "BufferLineSeparator",
+        "BufferLineIndicatorSelected",
+      },
+      exclude = {}, -- table: groups you don't want to clear
+    })
+end
 
 opt.smartindent = true
 opt.autoindent = true
@@ -47,9 +69,11 @@ keyset("i", "<TAB>", 'coc#pum#visible() ? coc#pum#next(1) : v:lua.check_back_spa
 
 require('neogit').setup{}
 
-require('lualine').setup()
+require('lualine').setup{
+    options = {theme = "onedark"}
+}
 
-require("bufferline").setup{}
+-- require("bufferline").setup{}
 
 require('nvim_comment').setup({
       marker_mapping = true
@@ -59,19 +83,8 @@ require('nvim_comment').setup({
     , comment_empty = false
     , line_mapping = "<leader>lc", operator_mapping = "<leader>c", comment_chunk_text_object = "ic"
 })
-require("transparent").setup({
-  enable = true,
-  extra_groups = 
-  { 
-    "BufferLineTabClose",
-    "BufferlineBufferSelected",
-    "BufferLineFill",
-    "BufferLineBackground",
-    "BufferLineSeparator",
-    "BufferLineIndicatorSelected",
-  },
-  exclude = {}, -- table: groups you don't want to clear
-})
+
+
 
 require'nvim-treesitter.configs'.setup{ 
     enable = true
@@ -79,15 +92,10 @@ require'nvim-treesitter.configs'.setup{
 
 require('telescope').setup{}
 
--- if exists("g:neovide")
-g.neovide_scale_factor = 0.5
-g.neovide_transparency = 0.54
-g.transparency = 0.9
-g.neovide_background_color = '#222330'..math.floor(255 * g.transparency)
--- endif
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', 'ff', builtin.find_files, {})
 vim.keymap.set('n', 'fg', builtin.live_grep, {})
+vim.keymap.set('n', 'fr', builtin.buffers, {})
 vim.keymap.set('n', 'fr', builtin.oldfiles, {})
 
 local db = require("dashboard")

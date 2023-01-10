@@ -10,7 +10,6 @@ pkgs:
     vim-nix
     nvim-comment
     telescope-nvim
-    bufferline-nvim
 
     coc-nvim
     coc-clangd

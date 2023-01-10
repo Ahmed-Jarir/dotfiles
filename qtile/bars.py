@@ -2,7 +2,7 @@ from libqtile import bar, widget
 
 from myWidgets import CurrencyConv
 from commonVars import colors
-from volumeWidget import Volume
+# from volumeWidget import Volume
 
 widget_defaults = dict(
     font="FiraCode Nerd Font Bold",
@@ -95,8 +95,8 @@ bottomBar=bar.Bar(
     [
         widget.Volume(
             fmt = "Vol: {}",
-            # unmute_format = "{volume}% [on]",
-            # mute_format = "{volume}% [off]",
+            unmute_format = "{volume}% [on]",
+            mute_format = "{volume}% [off]",
 			padding = 8,
             background = colors["mainbg"],
             foreground = colors["fg"],
