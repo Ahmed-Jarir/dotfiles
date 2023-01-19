@@ -55,7 +55,7 @@ keys = [
 
 	#Key([mod, "control"], "r",lazy.reload_config(), desc="Reload the config"),
 	Key([mod, "control"], "r",lazy.restart(), desc="Restart Qtile"),
-    Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
+    Key([mod, "shift"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
 
 
     Key([mod], 'm', lazy.group['scratchpad'].dropdown_toggle('cmus')),

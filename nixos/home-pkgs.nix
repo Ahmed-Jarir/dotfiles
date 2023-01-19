@@ -17,7 +17,8 @@ in{
     #ides
     # jetbrains.clion
     # jetbrains.rider
-    jetbrains.idea-ultimate
+    # jetbrains.idea-ultimate
+    jetbrains.idea-community
     # jetbrains.pycharm-professional
 
     #soc
