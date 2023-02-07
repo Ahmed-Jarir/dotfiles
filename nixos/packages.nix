@@ -8,28 +8,6 @@ let
     exec -a "$0" "$@"
   '';
   #shell apps
-  volume-change = pkgs.writeShellScriptBin "volume-change" ''
-    # Check if argument exists
-    if [ $# -ne 1 ]; then
-        echo "Usage: $0 <amount>"
-        exit 1
-    fi
-    # Check if argument is a number
-    if ! [ "$1" -eq "$1" ] 2> /dev/null; then
-        echo "<amount> should be an integer."
-    fi
-    amount=$1
-    current_level=$(${pkgs.alsa-utils}/bin/amixer -M get Master | grep -oE "[0-9]+%" | sed "s/%//" | head -n 1)
-    new_level=$((current_level + amount))
-    if [ "$new_level" -lt 0 ]; then
-        new_level=0
-    fi
-    new_level_percentage=$new_level
-    # Convert new level to a linear factor
-    new_level=$(echo "scale=2;" "$new_level / 100;" | ${pkgs.bc}/bin/bc | sed "s/^\./0./")
-    ${pkgs.pulseaudio}/bin/pactl set-sink-volume @DEFAULT_SINK@ "$new_level"
-    echo "Changed volume to $new_level_percentage%."
-  '';
   volout = pkgs.writeShellScriptBin "volout" ''
     if [ $# -ne 1 ]; then
         ${pkgs.pulseaudio}/bin/pactl list sinks short
@@ -71,7 +49,6 @@ in {
   environment.systemPackages = with pkgs; [
     # shell apps
     nvidia-offload
-    volume-change
     volout
     powermen
     media
@@ -118,5 +95,6 @@ in {
     font-awesome
 
     # libsForQt5.qt5.qtgraphicaleffects
+    unityhub
   ];
 }

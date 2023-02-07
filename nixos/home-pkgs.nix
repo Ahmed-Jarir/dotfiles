@@ -27,7 +27,6 @@ in{
     discord
 
     #game dev 
-    unityhub
     
     #art
     gimp
@@ -52,6 +51,7 @@ in{
     # google-chrome
 
 
+    arduino
     libnotify
     xfce.thunar
   ];

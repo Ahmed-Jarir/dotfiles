@@ -34,14 +34,13 @@ import re
 import subprocess
 
 from libqtile import bar
-from libqtile.command.base import expose_command
 from libqtile.widget import base
 
 __all__ = [
     "Volume",
 ]
 
-re_vol = re.compile(r"(\d?\d?\d?)%")
+re_vol = re.compile(r"\[(\d?\d?\d?)%\]")
 
 
 class Volume(base._TextBox):
@@ -72,20 +71,7 @@ class Volume(base._TextBox):
         ("volume_app", None, "App to control volume"),
         ("volume_up_command", None, "Volume up command"),
         ("volume_down_command", None, "Volume down command"),
-        (
-            "get_volume_command",
-            None,
-            "Command to get the current volume. "
-            "The expected output should include 1-3 numbers and a ``%`` sign.",
-        ),
-        ("check_mute_command", None, "Command to check mute status"),
-        (
-            "check_mute_string",
-            "[off]",
-            "String expected from check_mute_command when volume is muted."
-            "When the output of the command matches this string, the"
-            "audio source is treated as muted.",
-        ),
+        ("get_volume_command", None, "Command to get the current volume"),
         (
             "step",
             2,
@@ -99,7 +85,7 @@ class Volume(base._TextBox):
         ),
         (
             "mute_format",
-            "M",
+            "{volume}% M",
             "Format of text to display when the volume is muted. Available fields: 'volume'",
         ),
     ]
@@ -114,10 +100,10 @@ class Volume(base._TextBox):
 
         self.add_callbacks(
             {
-                "Button1": self.mute,
-                "Button3": self.run_app,
-                "Button4": self.increase_vol,
-                "Button5": self.decrease_vol,
+                "Button1": self.cmd_mute,
+                "Button3": self.cmd_run_app,
+                "Button4": self.cmd_increase_vol,
+                "Button5": self.cmd_decrease_vol,
             }
         )
 
@@ -213,18 +199,12 @@ class Volume(base._TextBox):
             if self.get_volume_command:
                 get_volume_cmd = self.get_volume_command
 
-            mixer_out = subprocess.getoutput(get_volume_cmd)
+            self.mixer_out = self.call_process(get_volume_cmd)
         except subprocess.CalledProcessError:
             return -1
 
-        check_mute = mixer_out
-        if self.check_mute_command:
-            check_mute = subprocess.getoutput(self.check_mute_command)
-
-        if self.check_mute_string in check_mute:
-            return -1
-
         volgroups = re_vol.search(self.mixer_out)
+
         if volgroups:
             return int(volgroups.groups()[0])
         else:
@@ -237,8 +217,7 @@ class Volume(base._TextBox):
         else:
             base._TextBox.draw(self)
 
-    @expose_command()
-    def increase_vol(self):
+    def cmd_increase_vol(self):
         if self.volume_up_command is not None:
             subprocess.call(self.volume_up_command, shell=True)
         else:
@@ -246,8 +225,7 @@ class Volume(base._TextBox):
                 self.create_amixer_command("-q", "sset", self.channel, "{}%+".format(self.step))
             )
 
-    @expose_command()
-    def decrease_vol(self):
+    def cmd_decrease_vol(self):
         if self.volume_down_command is not None:
             subprocess.call(self.volume_down_command, shell=True)
         else:
@@ -255,14 +233,12 @@ class Volume(base._TextBox):
                 self.create_amixer_command("-q", "sset", self.channel, "{}%-".format(self.step))
             )
 
-    @expose_command()
-    def mute(self):
+    def cmd_mute(self):
         if self.mute_command is not None:
             subprocess.call(self.mute_command, shell=True)
         else:
             subprocess.call(self.create_amixer_command("-q", "sset", self.channel, "toggle"))
 
-    @expose_command()
-    def run_app(self):
+    def cmd_run_app(self):
         if self.volume_app is not None:
             subprocess.Popen(self.volume_app, shell=True)
