@@ -52,8 +52,6 @@ screens = [
   Screen(
         top=topBar,
 		bottom=bottomBar,
-        wallpaper="~/.config/qtile/sbr.png",
-        wallpaper_mode="fill",
     ),
 ]
 

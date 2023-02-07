@@ -4,19 +4,19 @@ from libqtile.config import Match
 from commonVars import colors
 layouts = [
     layout.Bsp(
-			border_focus=colors["border"],
-			border_width=4,
+			border_focus = colors["border"],
+			border_width = 4,
 			margin = 6
         ),
     layout.Stack(
-			border_focus=colors["border"],
-			border_width=4,
-			num_stacks=2,
+			border_focus = colors["border"],
+			border_width = 4,
+			num_stacks = 1,
 			margin = 6
         ),
 	layout.TreeTab(
-			border_focus=colors["border"],
-			border_width=4,
+			border_focus = colors["border"],
+			border_width = 4,
 			margin = 6
         ),
     # layout.Matrix(),

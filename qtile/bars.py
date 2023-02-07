@@ -2,6 +2,7 @@ from libqtile import bar, widget
 
 from myWidgets import CurrencyConv
 from commonVars import colors
+from CapsNumLock import CapsNumLock
 from volumeWidget import Volume
 
 widget_defaults = dict(
@@ -176,12 +177,18 @@ bottomBar=bar.Bar(
             foreground = colors["mainbg"],
             background = colors["obg"],
         ),
-
-        widget.CapsNumLockIndicator(
-            fmt = "{}",
+        CapsNumLock(
+            format = "Num {num}",
 			background = colors["obg"],
 			foreground = colors["black"]
         ),
+
+
+			#         widget.CapsNumLockIndicator(
+			#             fmt = "{}",
+			# background = colors["obg"],
+			# foreground = colors["black"]
+			#         ),
 
         widget.TextBox(
             "",
