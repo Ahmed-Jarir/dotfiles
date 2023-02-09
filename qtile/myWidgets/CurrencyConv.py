@@ -5,6 +5,7 @@ from libqtile import bar
 from libqtile.widget import base
 from libqtile.log_utils import logger
 
+
 class CurrencyConv(base._TextBox):
 
     orientations = base.ORIENTATION_HORIZONTAL
@@ -13,7 +14,7 @@ class CurrencyConv(base._TextBox):
         ("update_interval", 6, "Update time in seconds."),
         ("precision", 2, "precision"),
         ("convert_to", "TRY", "A currency to convert to"),
-        ("convert_from", "USD", "A currency to convert from")
+        ("convert_from", "USD", "A currency to convert from"),
     ]
 
     def __init__(self, **config):
@@ -33,6 +34,8 @@ class CurrencyConv(base._TextBox):
 
             self.bar.draw()
         except ConnectionException:
+            self.text = "connection error"
+            self.bar.draw()
             pass
 
     def timer_setup(self):

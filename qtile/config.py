@@ -35,9 +35,11 @@ from libqtile import hook
 
 ##file imports##
 from keyBindings import *
-from layouts import * 
-from bars import * 
+from layouts import *
+from bars import *
+
 ##functions##
+
 
 @hook.subscribe.startup_once
 def autostart():
@@ -49,9 +51,9 @@ def autostart():
 
 
 screens = [
-  Screen(
+    Screen(
         top=topBar,
-		bottom=bottomBar,
+        bottom=bottomBar,
     ),
 ]
 

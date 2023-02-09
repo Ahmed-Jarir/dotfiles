@@ -58,5 +58,5 @@ class CapsNumLock(base.ThreadPoolText):
         """Poll content for the text box."""
         self.update_indicators()
         # status = " ".join([" ".join(indicator) for indicator in indicators])
-        status = self.format.format(caps=self.caps, num=self.num)
+        status = self.format.format(caps = self.caps, num = self.num)
         return status

@@ -172,7 +172,7 @@ class Volume(base._TextBox):
                 self.text = "\U0001f50a"
         else:
             self.text = (self.mute_format if self.mute else self.unmute_format).format(
-                volume=self.volume
+                volume = self.volume
             )
 
     def setup_images(self):
@@ -187,7 +187,7 @@ class Volume(base._TextBox):
         d_images = images.Loader(self.theme_path)(*names)
         for name, img in d_images.items():
             new_height = self.bar.height - 1
-            img.resize(height=new_height)
+            img.resize(height = new_height)
             if img.width > self.length:
                 self.length = img.width + self.actual_padding * 2
             self.surfaces[name] = img.pattern
@@ -213,32 +213,40 @@ class Volume(base._TextBox):
 
     def draw(self):
         if self.theme_path:
-            self.drawer.draw(offsetx=self.offset, offsety=self.offsety, width=self.length)
+            self.drawer.draw(
+                offsetx = self.offset, offsety = self.offsety, width = self.length
+            )
         else:
             base._TextBox.draw(self)
 
     def cmd_increase_vol(self):
         if self.volume_up_command is not None:
-            subprocess.call(self.volume_up_command, shell=True)
+            subprocess.call(self.volume_up_command, shell = True)
         else:
             subprocess.call(
-                self.create_amixer_command("-q", "sset", self.channel, "{}%+".format(self.step))
+                self.create_amixer_command(
+                    "-q", "sset", self.channel, "{}%+".format(self.step)
+                )
             )
 
     def cmd_decrease_vol(self):
         if self.volume_down_command is not None:
-            subprocess.call(self.volume_down_command, shell=True)
+            subprocess.call(self.volume_down_command, shell = True)
         else:
             subprocess.call(
-                self.create_amixer_command("-q", "sset", self.channel, "{}%-".format(self.step))
+                self.create_amixer_command(
+                    "-q", "sset", self.channel, "{}%-".format(self.step)
+                )
             )
 
     def cmd_mute(self):
         if self.mute_command is not None:
-            subprocess.call(self.mute_command, shell=True)
+            subprocess.call(self.mute_command, shell = True)
         else:
-            subprocess.call(self.create_amixer_command("-q", "sset", self.channel, "toggle"))
+            subprocess.call(
+                self.create_amixer_command("-q", "sset", self.channel, "toggle")
+            )
 
     def cmd_run_app(self):
         if self.volume_app is not None:
-            subprocess.Popen(self.volume_app, shell=True)
+            subprocess.Popen(self.volume_app, shell = True)
