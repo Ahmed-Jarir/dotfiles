@@ -3,7 +3,7 @@ from libqtile import bar, widget
 from myWidgets import CurrencyConv
 from commonVars import colors
 from CapsNumLock import CapsNumLock
-from volumeWidget import Volume
+from Volume2 import Volume2 as Volume
 
 widget_defaults = dict(
     font = "FiraCode Nerd Font Bold",
