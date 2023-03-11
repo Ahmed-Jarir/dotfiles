@@ -33,7 +33,7 @@
 
   hardware = {
     cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-    firmware = [ pkgs.rtw89-firmware ];
+    firmware = lib.mkIf (lib.versionOlder pkgs.linux-firmware.version "20230210") [ pkgs.rtw89-firmware ];
 
     opengl = {
       enable = true;

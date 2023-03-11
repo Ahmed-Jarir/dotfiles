@@ -54,6 +54,8 @@ in{
     arduino
     libnotify
     xfce.thunar
+    pamixer
+    google-chrome
   ];
 
 }

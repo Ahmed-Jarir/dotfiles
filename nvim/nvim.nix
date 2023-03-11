@@ -11,10 +11,12 @@ pkgs:
     nvim-comment
     telescope-nvim
 
-    coc-nvim
-    coc-clangd
-    coc-pyright
     nvim-lspconfig
+    nvim-cmp
+    cmp-nvim-lsp
+    cmp-nvim-ultisnips
+    telescope-ultisnips-nvim
+    ultisnips
 
     neogit
     vim-kitty-navigator
@@ -33,4 +35,13 @@ pkgs:
       sha256 = "sha256-ollCztmgulpMTyoks9ENMSmzE52dF9sMXti9ZF1SHnE=";
     })
   ];	
+  extraPackages = with pkgs; [
+    ripgrep
+    fd
+
+    lua-language-server
+    ccls
+    pyright
+    rnix-lsp
+  ];
 }
