@@ -187,11 +187,11 @@ bottomBar = bar.Bar(
             foreground = colors["obg"],
             background = colors["mainbg"],
         ),
-        CurrencyConv.CurrencyConv(
-            fmt = "USD: {} TRY",
-            foreground = colors["black"],
-            background = colors["obg"],
-        ),
+        # CurrencyConv.CurrencyConv(
+        #     fmt = "USD: {} TRY",
+        #     foreground = colors["black"],
+        #     background = colors["obg"],
+        # ),
         widget.TextBox(
             "",
             width = 17,

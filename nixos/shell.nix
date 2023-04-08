@@ -9,9 +9,9 @@ let
 in {
     programs.fish = {
         enable = true;
-    	inherit shellAliases;
-		shellInit = ''
-			set fish_greeting
+        inherit shellAliases;
+        shellInit = ''
+            set fish_greeting
             set -U namebg '242F9B'
             set -U dirTypeBg '646FD4'
             set -U dirBg '9BA3EB'

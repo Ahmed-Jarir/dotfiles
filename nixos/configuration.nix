@@ -38,6 +38,7 @@
     dconf.enable = true;
     nm-applet.enable = true;
     light.enable = true;
+    fish.enable = true;
 
   };  
   users = {
@@ -45,8 +46,8 @@
       isNormalUser = true;
       description = "ahmed";
       extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+      shell = pkgs.fish;
     };
-    defaultUserShell = pkgs.fish;
   };
 
   # Allow unfree packages

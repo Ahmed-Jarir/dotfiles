@@ -15,7 +15,9 @@ vim.cmd [[
     set backspace=indent,eol,start
 
     colorscheme onehalfdark
-    let g:mkdp_auto_start = 1
+    let g:mkdp_auto_start=1
+    set signcolumn=yes
+    highlight IndentBlanklineIndent guifg=#E06C75 gui=nocombine
 
     map ; :
 ]]
@@ -49,6 +51,7 @@ opt.autoindent = true
 opt.tabstop = 4
 opt.shiftwidth = 4
 opt.expandtab = true
+opt.termguicolors = true
 
 opt.clipboard = "unnamedplus"
 opt.mouse = "a"
@@ -70,8 +73,25 @@ end
 
 require('neogit').setup{}
 
+require('gitsigns').setup {
+  signs = {
+    add = { text = '+' },
+    change = { text = '~' },
+    delete = { text = '_' },
+    topdelete = { text = '‾' },
+    changedelete = { text = '~' },
+  },
+}
 require('lualine').setup{
     options = {theme = "onedark"}
+}
+
+require("indent_blankline").setup {
+    -- for example, context is off by default, use this to turn it on
+    show_current_context = true,
+    show_current_context_start = true,
+    show_trailing_blankline_indent = false,
+    char_highlight_list = {"IndentBlanklineIndent"},
 }
 
 -- require("bufferline").setup{}
@@ -87,17 +107,17 @@ require('nvim_comment').setup({
 
 
 
-require'nvim-treesitter.configs'.setup{
-    enable = true
-}
+-- require'nvim-treesitter.configs'.setup{
+--     enable = true
+-- }
 
 require('telescope').setup{}
 
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', 'ff', builtin.find_files, {})
 vim.keymap.set('n', 'fg', builtin.live_grep, {})
-vim.keymap.set('n', 'fr', builtin.buffers, {})
-vim.keymap.set('n', 'fr', builtin.oldfiles, {})
+vim.keymap.set('n', 'fb', builtin.buffers, {})
+vim.keymap.set('n', 'fo', builtin.oldfiles, {})
 
 local db = require("dashboard")
 local conf = {}
@@ -118,7 +138,7 @@ conf.custom_center = {
 		icon = "  ",
 		desc = "Find recent files                       ",
 		action = "Telescope oldfiles",
-		shortcut = "SPC f r",
+		shortcut = "SPC f o",
 	},
 	{
 		icon = "  ",
@@ -184,6 +204,8 @@ db.setup({
         preview_file_height = 11
     }
 })
+-- temporary
+--
 -- Declare the vim global (for LSP)
 _G.vim = vim
 
@@ -438,3 +460,5 @@ cmp.setup.cmdline(":", {
 		{ name = "cmdline" }
 	}
 })
+--
+-- end temporary

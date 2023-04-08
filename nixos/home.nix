@@ -2,6 +2,11 @@
 let
   neovimConf = import ../nvim/nvim.nix;
 in {
+  imports = [ 
+    ./shell.nix 
+    ./home-pkgs.nix
+    ./sysdservices.nix
+  ];
 
   home.username = "ahmed";
   home.homeDirectory = "/home/ahmed";
@@ -16,11 +21,6 @@ in {
     
     # thunar.enable = true;
   };
-  imports = [ 
-    ./shell.nix 
-    ./home-pkgs.nix
-    ./sysdservices.nix
-  ];
   #configs#
   xdg = {
     enable = true;

@@ -19,6 +19,7 @@ pkgs:
     ultisnips
 
     neogit
+    gitsigns-nvim
     vim-kitty-navigator
     markdown-preview-nvim
 
@@ -26,8 +27,9 @@ pkgs:
     onehalf
     dashboard-nvim
     lualine-nvim
+    indent-blankline-nvim
     nvim-web-devicons
-    (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
+    # (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
     (pkgs.fetchFromGitHub {
       owner = "xiyaowong";
       repo = "nvim-transparent";

@@ -19,7 +19,7 @@ in{
     # jetbrains.rider
     # jetbrains.idea-ultimate
     jetbrains.idea-community
-    # jetbrains.pycharm-professional
+    jetbrains.pycharm-professional
 
     #soc
     slack
@@ -56,6 +56,7 @@ in{
     xfce.thunar
     pamixer
     google-chrome
+    signal-desktop
   ];
 
 }
