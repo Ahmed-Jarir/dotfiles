@@ -134,8 +134,8 @@ bottomBar = bar.Bar(
             format = "Bat: {percent:.0%}{char}",
             background = colors["obg"],
             foreground = colors["black"],
-            charge_char = " ﮣ",
-            discharge_char = " -",
+            charge_char = " 󰂄",
+            discharge_char = " 󰂁",
             low_percentage = 0.2,
         ),
         widget.TextBox(

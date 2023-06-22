@@ -4,10 +4,10 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
-    ytmp.url = "github:Ahmed-Jarir/yt-mp";
+    # ytmp.url = "github:Ahmed-Jarir/yt-mp";
   };
 
-  outputs = { nixpkgs, home-manager, ytmp, ... }:
+  outputs = { nixpkgs, home-manager, ... }: #, ytmp
     let
 
       system = "x86_64-linux";
@@ -20,10 +20,10 @@
 
       modules = [
         
-        { nixpkgs.overlays = [ 
-            ytmp.overlays.${system}.default
-          ];
-        }
+        # { nixpkgs.overlays = [ 
+        #     ytmp.overlays.${system}.default
+        #   ];
+        # }
         # ytmp.overlays.${system}.default]; 
         ./configuration.nix
 

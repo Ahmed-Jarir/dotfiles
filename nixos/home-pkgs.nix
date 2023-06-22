@@ -10,12 +10,12 @@ let
 in{
   
   home.packages = with pkgs; [
-    ytmp
+    # ytmp
     check-volout
     # 
 
     #ides
-    # jetbrains.clion
+    jetbrains.clion
     # jetbrains.rider
     # jetbrains.idea-ultimate
     jetbrains.idea-community
@@ -57,6 +57,7 @@ in{
     pamixer
     google-chrome
     signal-desktop
+    yuzu-mainline
   ];
 
 }

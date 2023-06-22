@@ -8,7 +8,7 @@ sp_height = 0.85
 
 groups = [
     Group("SYS", spawn = terminal, layout = "bsp"),
-    Group("NET", spawn = "google-chrome-stable"),
+    Group("NET", spawn = "Brave-browser"),
     Group("UNI", spawn = "nautilus"),
     Group("DOC"),
     Group(
@@ -31,7 +31,7 @@ groups = [
             DropDown(
                 "cmus", "kitty cmus", opacity = sp_opacity, y = sp_y, height = sp_height
             ),
-            DropDown("term", "kitty", opacity = sp_opacity, y = sp_y, height = sp_height),
+            DropDown("term", "kitty", opacity = sp_opacity, y = sp_y, height = sp_height, on_focus_lost_hide = False),
         ],
     ),
 ]

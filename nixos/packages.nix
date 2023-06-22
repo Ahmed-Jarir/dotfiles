@@ -95,6 +95,9 @@ in {
     font-awesome
 
     # libsForQt5.qt5.qtgraphicaleffects
+
+    # ue4
     unityhub
+    pstree
   ];
 }
