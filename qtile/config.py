@@ -43,11 +43,11 @@ from bars import *
 
 @hook.subscribe.startup_once
 def autostart():
-    sp.Popen(["blueman-applet"])
-    sp.Popen(["dunst"])
-    sp.Popen(["picom"])
-    sp.Popen(["copyq"])
-    sp.Popen(["sxhkd"])
+    sp.Popen("blueman-applet")
+    sp.Popen("dunst")
+    sp.Popen("picom")
+    sp.Popen("copyq")
+    sp.Popen("sxhkd")
 
 
 screens = [

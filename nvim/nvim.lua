@@ -12,11 +12,12 @@ vim.cmd [[
     set ignorecase
     set noswapfile
     set noerrorbells
+    set signcolumn=yes
+    set guicursor=n-v-c-i:block
     set backspace=indent,eol,start
 
     colorscheme onehalfdark
     let g:mkdp_auto_start=1
-    set signcolumn=yes
     highlight IndentBlanklineIndent guifg=#E06C75 gui=nocombine
 
     map ; :

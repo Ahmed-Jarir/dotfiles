@@ -11,6 +11,9 @@ in {
         enable = true;
         inherit shellAliases;
         shellInit = ''
+
+            set fish_cursor_default block blink
+            set fish_cursor_insert  block blink
             set fish_greeting
             set -U namebg '242F9B'
             set -U dirTypeBg '646FD4'
@@ -61,11 +64,11 @@ in {
                     case default
                         printf '  '
                     case insert
-                        printf '  '
+                        printf ' 󰘎 '
                     case replace_one
                         printf '  '
                     case visual
-                        printf '  '
+                        printf ' 󰈈 '
                     case '*'
                         printf '  '
                 end

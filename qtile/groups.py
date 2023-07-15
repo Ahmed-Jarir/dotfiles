@@ -14,7 +14,7 @@ groups = [
     Group(
         "GDV",
         spawn = "unityhub",
-        matches = [Match(wm_class = [" unityhub", "Unity"])],
+        matches = [Match(wm_class = ["unityhub", "Unity"])],
         layout = "treetab",
     ),
     Group("VRM", spawn = "virt-manager", matches = [Match(wm_class = ["virt-manager"])]),
