@@ -11,15 +11,16 @@ in{
   
   home.packages = with pkgs; [
     # ytmp
+    # rgw
     check-volout
     # 
 
     #ides
-    jetbrains.clion
-    # jetbrains.rider
-    # jetbrains.idea-ultimate
-    jetbrains.idea-community
-    jetbrains.pycharm-professional
+    # jetbrains.clion
+    jetbrains.rider
+    jetbrains.idea-ultimate
+    # jetbrains.idea-community
+    # jetbrains.pycharm-professional
 
     #soc
     slack
@@ -32,8 +33,9 @@ in{
     gimp
     # blender
     
-    #music player
     cmus
+    mpv
+    syncplay
     
     # cool-retro-term
 
@@ -58,6 +60,10 @@ in{
     google-chrome
     signal-desktop
     yuzu-mainline
+    zathura
+    android-studio
+    mpv
+    xwinwrap
   ];
 
 }

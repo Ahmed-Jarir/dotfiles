@@ -3,7 +3,7 @@ pkgs:
   enable = true;
   vimAlias = true;
   extraConfig = ''
-   luafile /home/ahmed/dotfiles/nvim/nvim.lua
+   luafile ${./nvim.lua}
   '';
   plugins = with pkgs.vimPlugins; [
 
@@ -29,7 +29,7 @@ pkgs:
     lualine-nvim
     indent-blankline-nvim
     nvim-web-devicons
-    # (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
+    (nvim-treesitter.withPlugins (_: pkgs.tree-sitter.allGrammars))
     (pkgs.fetchFromGitHub {
       owner = "xiyaowong";
       repo = "nvim-transparent";

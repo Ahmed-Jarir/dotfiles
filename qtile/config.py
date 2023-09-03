@@ -55,6 +55,13 @@ screens = [
         top=topBar,
         bottom=bottomBar,
     ),
+    Screen(
+        top=bar.Bar([
+            widget.GroupBox(),
+            widget.WindowName(),
+            ], 30),
+    ),
+
 ]
 
 auto_fullscreen = True

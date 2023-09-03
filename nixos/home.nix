@@ -18,7 +18,7 @@ in {
       enable = true;
       enableBashIntegration = true;
     };
-    
+
     # thunar.enable = true;
   };
   #configs#
