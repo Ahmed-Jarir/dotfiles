@@ -6,6 +6,7 @@
     layout = "us";
     displayManager.gdm.enable = true;
     displayManager.gdm.wayland = false;
+
     desktopManager.gnome.enable = false;
 
     videoDrivers = [ "nvidia" ];

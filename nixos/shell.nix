@@ -5,6 +5,9 @@ let
       qlog = "cat /home/ahmed/.local/share/qtile/qtile.log";
       pks = "nix search nixpkgs";
       nflake = "nix flake new -t github:nix-community/nix-direnv ./";
+      disp-right = "xrandr --setprovideroutputsource NVIDIA-G0 0x53 && xrandr --output eDP-1 --auto --output HDMI-1-0 --auto --right-of  eDP-1";
+      disp-left = "xrandr --setprovideroutputsource NVIDIA-G0 0x53 && xrandr --output eDP-1 --auto --output HDMI-1-0 --auto --left-of  eDP-1";
+      disp-same = "xrandr --setprovideroutputsource NVIDIA-G0 0x53 && xrandr --output eDP-1 --auto --output HDMI-1-0 --auto --same-as  eDP-1";
   };
 in {
     programs.fish = {
