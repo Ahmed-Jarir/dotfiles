@@ -11,9 +11,11 @@
   imports =
   [
       ./boot.nix
-      ./hardware-configuration.nix
+      ./hardwareConfiguration.nix
       ./packages.nix
       ./services.nix
+      ./vtol.nix
+      # ./avr_sim.nix
   ];
 
   networking = {

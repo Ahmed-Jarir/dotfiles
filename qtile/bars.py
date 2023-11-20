@@ -3,7 +3,8 @@ from libqtile import bar, widget
 from myWidgets import CurrencyConv
 from commonVars import colors
 from CapsNumLock import CapsNumLock
-from Volume2 import Volume2 as Volume
+# from Volume2 import Volume2 as Volume
+from Volume import Volume as Volume
 
 widget_defaults = dict(
     font = "FiraCode Nerd Font Bold",
@@ -31,9 +32,8 @@ topBar = bar.Bar(
         ),
         widget.TextBox(
             "",
-            width = 17,
-            fontsize = 16,
-            padding = -2,
+            fontsize = 20,
+            padding = 0,
             foreground = colors["mainbg"],
             background = colors["obg"],
         ),
@@ -43,9 +43,8 @@ topBar = bar.Bar(
         ),
         widget.TextBox(
             "",
-            width = 17,
-            fontsize = 16,
-            padding = -2,
+            fontsize = 20,
+            padding = 0,
             foreground = colors["obg"],
             background = colors["mainbg"],
         ),
@@ -55,9 +54,8 @@ topBar = bar.Bar(
         widget.Spacer(),
         widget.TextBox(
             "",
-            width = 18,
             fontsize = 20,
-            padding = -2,
+            padding = 0,
             foreground = colors["obg"],
             background = colors["mainbg"],
         ),
@@ -67,9 +65,8 @@ topBar = bar.Bar(
         ),
         widget.TextBox(
             "",
-            width = 18,
             fontsize = 20,
-            padding = -2,
+            padding = 0,
             foreground = colors["mainbg"],
             background = colors["obg"],
         ),
@@ -94,6 +91,7 @@ bottomBar = bar.Bar(
             padding = 8,
             background = colors["mainbg"],
             foreground = colors["fg"],
+            # get_volume_command = "pamixer --get-volume",
             step = 5,
         ),
         widget.TextBox(
@@ -179,27 +177,27 @@ bottomBar = bar.Bar(
         widget.Spacer(),
         widget.Cmus(max_chars = 20),
         widget.Spacer(),
-        widget.TextBox(
-            "",
-            width = 17,
-            fontsize = 13,
-            padding = 2,
-            foreground = colors["obg"],
-            background = colors["mainbg"],
-        ),
+        # widget.TextBox(
+        #     "",
+        #     width = 17,
+        #     fontsize = 13,
+        #     padding = 2,
+        #     foreground = colors["obg"],
+        #     background = colors["mainbg"],
+        # ),
         # CurrencyConv.CurrencyConv(
         #     fmt = "USD: {} TRY",
         #     foreground = colors["black"],
         #     background = colors["obg"],
         # ),
-        widget.TextBox(
-            "",
-            width = 17,
-            fontsize = 13,
-            padding = 2,
-            foreground = colors["mainbg"],
-            background = colors["obg"],
-        ),
+        # widget.TextBox(
+        #     "",
+        #     width = 17,
+        #     fontsize = 13,
+        #     padding = 2,
+        #     foreground = colors["mainbg"],
+        #     background = colors["obg"],
+        # ),
         widget.Backlight(
             fmt = 'brighness: {}',
             backlight_name = "nvidia_wmi_ec_backlight",
@@ -208,6 +206,38 @@ bottomBar = bar.Bar(
         ),
     ],
     14,
+    background = colors["mainbg"],
+    border_color = colors["obg"],
+    border_width = 2,
+    opacity = 0.94,
+)
+secondTopBar = bar.Bar([
+        widget.GroupBox(
+            fontsize = 11,
+            margin_y = 3,
+            margin_x = 0,
+            padding_y = 0,
+            padding_x = 3,
+            borderwidth = 3,
+            active = colors["fg"],
+            inactive = colors["black"],
+            urgent_text = "e36841",
+            highlight_color = colors["obg"],
+            highlight_method = "block",
+            background = colors["mainbg"],
+
+        ),
+        widget.Spacer(),
+        widget.WindowName(foreground = colors["fg"]),
+        widget.Spacer(),
+        widget.Clock(
+            format = "%A, %b %d %I:%M %p",
+            background = colors["mainbg"],
+            foreground = colors["fg"],
+        ),
+
+    ],
+    15,
     background = colors["mainbg"],
     border_color = colors["obg"],
     border_width = 2,

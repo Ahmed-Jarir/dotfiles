@@ -75,7 +75,9 @@ in {
     # tools
     fd
     git
+    zip
     maim
+    unzip
     xclip
     picom 
     git-lfs
@@ -86,6 +88,7 @@ in {
     brightnessctl
     xorg.xbacklight
     python39Packages.dbus-next
+    qgroundcontrol
 
     # vim
     vim
@@ -97,7 +100,7 @@ in {
     # libsForQt5.qt5.qtgraphicaleffects
 
     # ue4
-    unityhub
     pstree
+    xdotool
   ];
 }

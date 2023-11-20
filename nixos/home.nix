@@ -4,8 +4,8 @@ let
 in {
   imports = [ 
     ./shell.nix 
-    ./home-pkgs.nix
-    ./sysdservices.nix
+    ./homePackages.nix
+    ./sysdServices.nix
   ];
 
   home.username = "ahmed";
@@ -38,6 +38,11 @@ in {
       xmonad = {
         source = ../xmonad;
         target = "xmonad";
+        recursive = true;
+      };
+      nvim = {
+        source = ../nvim;
+        target = "nvim";
         recursive = true;
       };
     };

@@ -18,12 +18,19 @@
     nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
       inherit system;
 
+      specialArgs = {
+        username = "ahmed";
+      };
       modules = [
         
-        # { nixpkgs.overlays = [ 
-        #     ytmp.overlays.${system}.default
-        #   ];
-        # }
+        { nixpkgs.overlays = [ 
+            (import ./avr_sim.nix)
+            # ({pkgs ? (import <nixpkgs>) {}}: {
+            #     avrsim = 
+            # })
+            # avrsim.overlays.${system}.default
+          ];
+        }
         # ytmp.overlays.${system}.default]; 
         ./configuration.nix
 

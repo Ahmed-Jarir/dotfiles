@@ -41,6 +41,17 @@
   console.useXkbConfig = true;
 
   services = {
+
+
+    upower = {
+      enable = true;
+      usePercentageForPolicy = true;
+      percentageLow = 40;
+      percentageCritical = 20;
+      percentageAction = 20;
+      # criticalPowerAction = "notify-send -u critical \"the battery level is below 20%\"";
+      criticalPowerAction = "Hibernate";
+    };
     printing.enable = true;
     blueman.enable = true;
     dbus.packages = with pkgs; [ blueman ];

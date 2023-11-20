@@ -56,10 +56,7 @@ screens = [
         bottom=bottomBar,
     ),
     Screen(
-        top=bar.Bar([
-            widget.GroupBox(),
-            widget.WindowName(),
-            ], 30),
+        top = secondTopBar,
     ),
 
 ]
