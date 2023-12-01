@@ -23,14 +23,6 @@
       };
       modules = [
         
-        { nixpkgs.overlays = [ 
-            (import ./avr_sim.nix)
-            # ({pkgs ? (import <nixpkgs>) {}}: {
-            #     avrsim = 
-            # })
-            # avrsim.overlays.${system}.default
-          ];
-        }
         # ytmp.overlays.${system}.default]; 
         ./configuration.nix
 

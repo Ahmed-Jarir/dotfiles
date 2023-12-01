@@ -14,8 +14,12 @@
       ./hardwareConfiguration.nix
       ./packages.nix
       ./services.nix
-      ./vtol.nix
-      # ./avr_sim.nix
+  ];
+
+  nixpkgs.overlays = [
+    (final: prev: {
+      avr-sim = pkgs.callPackage ./avr-sim.nix { };
+    })
   ];
 
   networking = {

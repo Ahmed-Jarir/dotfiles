@@ -66,6 +66,8 @@ in{
     android-studio
     mpv
     xwinwrap
+
+    avr-sim
   ];
 
 }
