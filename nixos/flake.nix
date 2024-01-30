@@ -4,18 +4,23 @@
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-unstable";
     home-manager.url = "github:nix-community/home-manager";
-    # ytmp.url = "github:Ahmed-Jarir/yt-mp";
+
+    nixvim = {
+      url = "github:nix-community/nixvim";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
   };
 
-  outputs = { nixpkgs, home-manager, ... }: #, ytmp
+  outputs = { self, nixpkgs, home-manager, ... } @ inputs:
     let
 
+      inherit (self) outputs;
       system = "x86_64-linux";
 
-      lib = nixpkgs.lib;
+      # lib = nixpkgs.lib;
 
     in {
-    nixosConfigurations."nixos" = nixpkgs.lib.nixosSystem {
+    nixosConfigurations."nixos" = inputs.nixpkgs.lib.nixosSystem {
       inherit system;
 
       specialArgs = {
@@ -25,18 +30,24 @@
         
         # ytmp.overlays.${system}.default]; 
         ./configuration.nix
-
-    home-manager.nixosModules.home-manager
-        ({ pkgs, config, ... }: {
-          home-manager = {
-          	useGlobalPkgs = true;
-          	useUserPackages = true;
-          	users = {
-          		ahmed = import ./user.nix; 
-          	};
-          };
-        })
       ];
     };
+    homeConfigurations."ahmed@nixos" = 
+      home-manager.lib.homeManagerConfiguration {
+        pkgs = nixpkgs.legacyPackages.${system};
+        extraSpecialArgs = {inherit inputs;};
+        modules = [./home.nix];
+    };
+      #   home-manager.nixosModules.home-manager
+      #   ({ pkgs, nixvim, config, ... }: {
+      #     home-manager = {
+      #     	useGlobalPkgs = true;
+      #     	useUserPackages = true;
+      #     	users = {
+      #     		ahmed = import ./user.nix; 
+      #     	};
+      #     };
+      #   })
+      # ];
   };
 }

@@ -46,8 +46,9 @@
       modesetting.enable = true;
       prime = {
         offload.enable = true;
-  
+        offload.enableOffloadCmd = true;
         amdgpuBusId = "PCI:6:0:0";
+
   
         nvidiaBusId = "PCI:1:0:0";
       };
@@ -59,12 +60,5 @@
 	  	Enable = "Source,Sink,Media,Socket";
 	  };
 	};
-  };
-  specialisation = {
-    external-display.configuration = {
-      system.nixos.tags = [ "external-display" ];
-      hardware.nvidia.prime.offload.enable = lib.mkForce false;
-      hardware.nvidia.powerManagement.enable = lib.mkForce false;
-    };
   };
 }

@@ -1,4 +1,4 @@
-{ pkgs, ... }:
+{ pkgs, inputs, ... }:
 let
   neovimConf = import ../nvim/nvim.nix;
 in {
@@ -6,18 +6,29 @@ in {
     ./shell.nix 
     ./homePackages.nix
     ./sysdServices.nix
+    inputs.nixvim.homeManagerModules.nixvim
   ];
+ nixpkgs = {
+    config.allowUnfree = true;
+    config.packageOverrides =  pkgs: rec{
+      vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+    };
+  };
 
   home.username = "ahmed";
   home.homeDirectory = "/home/ahmed";
   programs = {
     kitty.enable = true;
-    neovim = neovimConf pkgs;
+    # neovim = ;
     direnv = {
       nix-direnv.enable = true;
       enable = true;
       enableBashIntegration = true;
     };
+    nixvim = neovimConf pkgs;
+    # steam = {
+    #   enable = true;
+    # };
 
     # thunar.enable = true;
   };
@@ -40,11 +51,11 @@ in {
         target = "xmonad";
         recursive = true;
       };
-      nvim = {
-        source = ../nvim;
-        target = "nvim";
-        recursive = true;
-      };
+      # nvim = {
+      #   source = ../nvim;
+        # target = "nvim";
+        # recursive = true;
+      # };
     };
   };
   #end configs#
@@ -62,9 +73,10 @@ in {
         "super + s"                        = "rofi -show ssh -no-parse-known-hosts -disable-history";
         "super + p"                        = "powermen";
         "super + o"                        = "rofi -show run";
-        "super + shift + s"                = "maim -s -o -D -u | xclip -selection clipboard -t image/png";
+        "super + shift + s"                = "${pkgs.maim}/bin/maim -s -o -D -u | xclip -selection clipboard -t image/png";
       };
     };
+
   };
 
   home.stateVersion = "22.05";

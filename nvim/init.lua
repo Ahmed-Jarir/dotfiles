@@ -25,51 +25,6 @@ vim.cmd [[
 ]]
 
 
-g.mapleader = ' '
-if g.neovide then
-    g.neovide_scale_factor = 0.5
-    g.neovide_transparency = 0.94
-    g.transparency = 0.0
-    g.neovide_background_color = '#222330'..math.floor(255 * g.neovide_transparency)
-
-else
-    vim.api.nvim_set_hl(0,"Normal", { bg = "none"})
-    vim.api.nvim_set_hl(0,"NormalFloat", { bg = "none"})
-    -- require("transparent").setup({
-    --   enable = true,
-    --   extra_groups =
-    --   {
-    --     "BufferLineTabClose",
-    --     "BufferlineBufferSelected",
-    --     "BufferLineFill",
-    --     "BufferLineBackground",
-    --     "BufferLineSeparator",
-    --     "BufferLineIndicatorSelected",
-    --   },
-    --   exclude = {}, -- table: groups you don't want to clear
-    -- })
-end
-
-opt.smartindent = true
-opt.autoindent = true
-opt.tabstop = 4
-opt.shiftwidth = 4
-opt.expandtab = true
-opt.termguicolors = true
-
-opt.clipboard = "unnamedplus"
-opt.mouse = "a"
-
-opt.number = true
-
-opt.smartcase = true
-opt.ttimeoutlen = 5
-opt.compatible = false
-opt.autoread = true
-opt.incsearch = true
-opt.hidden = true
-opt.shortmess = "A"
-
 function _G.check_back_space()
     local col = vim.fn.col('.') - 1
     return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
@@ -103,14 +58,6 @@ require('nvim_comment').setup({
 -- require'nvim-treesitter.configs'.setup{
 --     enable = true
 -- }
-
-require('telescope').setup{}
-
-local builtin = require('telescope.builtin')
-vim.keymap.set('n', 'ff', builtin.find_files, {})
-vim.keymap.set('n', 'fg', builtin.live_grep, {})
-vim.keymap.set('n', 'fb', builtin.buffers, {})
-vim.keymap.set('n', 'fo', builtin.oldfiles, {})
 
 local db = require("dashboard")
 local conf = {}

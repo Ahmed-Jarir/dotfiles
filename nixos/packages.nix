@@ -67,8 +67,7 @@ in {
     xmobar
     gxmessage
     stalonetray
-    qutebrowser
-    # foxitreader
+    # qutebrowser
     libreoffice
 
 
@@ -76,13 +75,12 @@ in {
     fd
     git
     zip
-    maim
     unzip
     xclip
     picom 
     git-lfs
     ripgrep
-    dotnet-sdk
+    # dotnet-sdk
     alsa-utils
     python3
     brightnessctl
@@ -100,7 +98,7 @@ in {
     # libsForQt5.qt5.qtgraphicaleffects
 
     # ue4
-    pstree
+    # pstree
     xdotool
   ];
 }

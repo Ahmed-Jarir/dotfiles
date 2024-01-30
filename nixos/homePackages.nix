@@ -20,15 +20,15 @@ in{
     jetbrains.rider
     # jetbrains.idea-ultimate
     # jetbrains.idea-community
-    jetbrains.pycharm-professional
+    # jetbrains.pycharm-professional
 
     #soc
-    slack
-    zoom-us
+    # slack
+    # zoom-us
     discord
 
     #game dev 
-    godot_4
+    # godot_4
     unityhub
     
     #art
@@ -36,8 +36,7 @@ in{
     # blender
     
     cmus
-    mpv
-    syncplay
+    # syncplay
     
     # cool-retro-term
 
@@ -60,14 +59,10 @@ in{
     xfce.thunar
     pamixer
     google-chrome
-    signal-desktop
-    yuzu-mainline
+    # signal-desktop
     zathura
-    android-studio
-    mpv
-    xwinwrap
-
-    avr-sim
+    # android-studio
+    # avr-sim
   ];
 
 }
