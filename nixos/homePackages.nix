@@ -63,6 +63,7 @@ in{
     zathura
     # android-studio
     # avr-sim
+    zoom
   ];
 
 }

@@ -42,7 +42,7 @@ pkgs:
         shortmess = "A";
 
         undofile = true;
-        backup = true;
+        backup = false;
         swapfile = false;
 
     };

@@ -16,11 +16,11 @@
       ./services.nix
   ];
 
-  nixpkgs.overlays = [
-    (final: prev: {
-      avr-sim = pkgs.callPackage ./avr-sim.nix { };
-    })
-  ];
+  # nixpkgs.overlays = [
+  #   (final: prev: {
+  #     avr-sim = pkgs.callPackage ./avr-sim.nix { };
+  #   })
+  # ];
 
   networking = {
     hostName = "nixos";

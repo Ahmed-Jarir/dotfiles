@@ -17,7 +17,6 @@ vim.cmd [[
     set guicursor=n-v-c-i:block
     set backspace=indent,eol,start
 
-    colorscheme onehalfdark
     let g:mkdp_auto_start=1
     highlight IndentBlanklineIndent guifg=#E06C75 gui=nocombine
 
@@ -29,10 +28,6 @@ function _G.check_back_space()
     local col = vim.fn.col('.') - 1
     return col == 0 or vim.fn.getline('.'):sub(col, col):match('%s') ~= nil
 end
-
-require('lualine').setup{
-    options = {theme = "onedark"}
-}
 
 --require("indent_blankline").setup {
 --    -- for example, context is off by default, use this to turn it on

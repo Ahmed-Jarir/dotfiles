@@ -1,7 +1,7 @@
 { pkgs, ... }:
 let
   shellAliases = {
-      rebuild = "sudo nixos-rebuild switch --flake /home/ahmed/dotfiles/nixos/ .#nixos";
+      rebuild = "sudo nixos-rebuild switch --flake /home/ahmed/dotfiles/nixos/";
       hrebuild = "home-manager switch --flake /home/ahmed/dotfiles/nixos/ .#ahmed@nixos";
       qlog = "cat /home/ahmed/.local/share/qtile/qtile.log";
       pks = "nix search nixpkgs";

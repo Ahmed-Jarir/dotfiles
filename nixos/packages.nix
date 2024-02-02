@@ -95,7 +95,7 @@ in {
     # fonts 
     font-awesome
 
-    # libsForQt5.qt5.qtgraphicaleffects
+    libsForQt5.qt5.qtgraphicaleffects
 
     # ue4
     # pstree
