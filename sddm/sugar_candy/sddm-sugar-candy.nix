@@ -4,7 +4,7 @@ stdenv.mkDerivation rec {
     installPhase = ''
 		mkdir -p $out
 		cp -R ./* $out/
-        cp ${../../wallpapers/RockyMountainVillage.png} $out/Backgrounds/Background.png
+        cp ${../../wallpapers/rocky-mountain-village.png} $out/Backgrounds/Background.png
         rm theme.conf
         cp ${./sugar-candy.conf} $out/theme.conf
 	'';

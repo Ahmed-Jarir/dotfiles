@@ -10,7 +10,7 @@
 		# displayManager.gdm.enable = true;
 		# displayManager.gdm.wayland = false;
 
-		desktopManager.gnome.enable = false;
+		desktopManager.gnome.enable = true;
 
 		videoDrivers = [ "nvidia" ];
 		libinput = {
@@ -25,18 +25,18 @@
 		
 		windowManager ={
 			qtile.enable = true;
-			xmonad = {
-				enable = true;
-				enableContribAndExtras = true;
-				extraPackages = haskellPackages: [
-					haskellPackages.xmonad-contrib
-					haskellPackages.xmonad-extras
-					haskellPackages.xmonad-utils
-					haskellPackages.dbus
-					haskellPackages.List
-					haskellPackages.monad-logger
-				];
-			};
+			# xmonad = {
+			# 	enable = true;
+			# 	enableContribAndExtras = true;
+			# 	extraPackages = haskellPackages: [
+			# 		haskellPackages.xmonad-contrib
+			# 		haskellPackages.xmonad-extras
+			# 		haskellPackages.xmonad-utils
+			# 		haskellPackages.dbus
+			# 		haskellPackages.List
+			# 		haskellPackages.monad-logger
+			# 	];
+			# };
 		};
 
 		xkbOptions = "ctrl:nocaps";

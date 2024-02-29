@@ -87,6 +87,30 @@ pkgs:
                 "<s-tab>" = "cmp.mapping.select_prev_item()";
             };
         };
+        # dashboard = {
+        #     enable = false;
+        #     header = ["-" "-" "-"];
+        #     center = [
+        #         {
+		      #       icon = " ";
+		      #       desc = "Find files";
+		      #       action = "Telescope find_files find_command=rg,--hidden,--files";
+		      #       shortcut = "SPC f f";
+        #
+        #         }
+        #         {
+		      #      icon = " ";
+		      #      desc = "Find word";
+		      #      action = "Telescope live_grep";
+		      #      shortcut = "SPC f g";
+        #         }
+        #         {
+		      #       icon = " ";
+		      #       desc = "Load new theme";
+		      #       action = "Telescope colorscheme";
+        #         }
+        #     ];
+        # };
         # neogen.enable = true;
     };
     extraConfigLua = ''

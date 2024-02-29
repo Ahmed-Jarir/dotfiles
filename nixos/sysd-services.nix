@@ -4,8 +4,12 @@ let
   rgw = pkgs.writeShellScriptBin "rgw" ''
     #!/bin/bash
 
+    if [ $(${pkgs.wmctrl}/bin/wmctrl -m | grep Name: | sed "s/Name: //")  != "qtile" ]; then
+        exit 1
+    fi
+
     # Check for arguments
-    if [ $# -eq 0 ]; then
+     if [ $# -eq 0 ]; then
         echo "Usage: $0 <wallpaper_directory> [dimensions]"
         echo "example: $0 ~/wallpapers 1920x1080+0+0"
         exit 1

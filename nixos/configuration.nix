@@ -11,7 +11,7 @@
   imports =
   [
       ./boot.nix
-      ./hardwareConfiguration.nix
+      ./hardware-configuration.nix
       ./packages.nix
       ./services.nix
   ];

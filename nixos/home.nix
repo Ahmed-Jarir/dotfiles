@@ -4,8 +4,8 @@ let
 in {
   imports = [ 
     ./shell.nix 
-    ./homePackages.nix
-    ./sysdServices.nix
+    ./home-packages.nix
+    ./sysd-services.nix
     inputs.nixvim.homeManagerModules.nixvim
   ];
  nixpkgs = {
