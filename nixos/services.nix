@@ -8,9 +8,9 @@
 
 		layout = "us";
 		# displayManager.gdm.enable = true;
-		# displayManager.gdm.wayland = false;
 
 		desktopManager.gnome.enable = true;
+		# desktopManager.plasma6.enable = true;
 
 		videoDrivers = [ "nvidia" ];
 		libinput = {
@@ -25,18 +25,6 @@
 		
 		windowManager ={
 			qtile.enable = true;
-			# xmonad = {
-			# 	enable = true;
-			# 	enableContribAndExtras = true;
-			# 	extraPackages = haskellPackages: [
-			# 		haskellPackages.xmonad-contrib
-			# 		haskellPackages.xmonad-extras
-			# 		haskellPackages.xmonad-utils
-			# 		haskellPackages.dbus
-			# 		haskellPackages.List
-			# 		haskellPackages.monad-logger
-			# 	];
-			# };
 		};
 
 		xkbOptions = "ctrl:nocaps";
@@ -50,9 +38,9 @@
 			enable = true;
 			usePercentageForPolicy = true;
 			percentageLow = 40;
-			percentageCritical = 20;
+			percentageCritical = 10;
 			percentageAction = 20;
-			# criticalPowerAction = "notify-send -u critical \"the battery level is below 20%\"";
+			# criticalPowerAction = "${pkgs.notify-send}/bin/notify-send -u critical \"the battery level is below 20%\"";
 			criticalPowerAction = "Hibernate";
 		};
 		printing.enable = true;
@@ -64,14 +52,11 @@
 			allowAnyUser = true;
 		};
 		
-		#pipewire conf
-
 		pipewire = {
 			enable = true;
 			alsa.enable = true;
 			alsa.support32Bit = true;
 			pulse.enable = true;
 		};
-		#end of pipwire conf
 	};
 }

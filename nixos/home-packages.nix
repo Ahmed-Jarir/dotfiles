@@ -56,12 +56,11 @@ in{
 
     arduino
     libnotify
-    xfce.thunar
     pamixer
     google-chrome
     # signal-desktop
     zathura
-    # android-studio
+    android-studio
     # avr-sim
     zoom
   ];

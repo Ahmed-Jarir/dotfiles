@@ -1,12 +1,11 @@
 { pkgs, inputs, ... }:
-let
-  neovimConf = import ../nvim/nvim.nix;
-in {
+{
   imports = [ 
     ./shell.nix 
     ./home-packages.nix
     ./sysd-services.nix
     inputs.nixvim.homeManagerModules.nixvim
+    ../nixvim
   ];
  nixpkgs = {
     config.allowUnfree = true;
@@ -19,18 +18,11 @@ in {
   home.homeDirectory = "/home/ahmed";
   programs = {
     kitty.enable = true;
-    # neovim = ;
     direnv = {
       nix-direnv.enable = true;
       enable = true;
       enableBashIntegration = true;
     };
-    nixvim = neovimConf pkgs;
-    # steam = {
-    #   enable = true;
-    # };
-
-    # thunar.enable = true;
   };
   #configs#
   xdg = {
@@ -51,11 +43,6 @@ in {
         target = "xmonad";
         recursive = true;
       };
-      # nvim = {
-      #   source = ../nvim;
-        # target = "nvim";
-        # recursive = true;
-      # };
     };
   };
   #end configs#
