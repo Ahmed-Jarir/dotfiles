@@ -18,13 +18,16 @@ in{
     #ides
     # jetbrains.clion
     jetbrains.rider
+    neovide
     # jetbrains.idea-ultimate
     # jetbrains.idea-community
     # jetbrains.pycharm-professional
 
     #soc
-    # slack
+    slack
+    zoom
     # zoom-us
+    # signal-desktop
     discord
 
     #game dev 
@@ -45,8 +48,6 @@ in{
     btop
     racket
 
-    neovide
-
     nodejs
     yarn
 
@@ -54,15 +55,13 @@ in{
     # google-chrome
 
 
-    arduino
+    # arduino
     libnotify
     pamixer
     google-chrome
-    # signal-desktop
     zathura
     android-studio
     # avr-sim
-    zoom
   ];
 
 }

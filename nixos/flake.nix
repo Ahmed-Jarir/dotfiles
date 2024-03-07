@@ -9,6 +9,8 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
+
+    nix-gc-env.url = "github:Julow/nix-gc-env";
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs:

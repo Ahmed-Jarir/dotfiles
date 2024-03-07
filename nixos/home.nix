@@ -63,6 +63,19 @@
         "super + shift + s"                = "${pkgs.maim}/bin/maim -s -o -D -u | xclip -selection clipboard -t image/png";
       };
     };
+    syncthing.enable = true;
+    # = {
+        
+        # extraOptions = [
+        #     "--data=~/Documents/Sync"
+        #     "--config=~/.config/syncthing"
+        # ];
+        # settings.folders = {
+        #     "~/Documents/Sync/personal" = {
+        #         id = "personal";
+        #     };
+        # };
+    # };
 
   };
 
