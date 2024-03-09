@@ -6,8 +6,6 @@
 	services.xserver = {
 		enable = true;
 
-		layout = "us";
-		# displayManager.gdm.enable = true;
 
 		desktopManager.gnome.enable = true;
 		# desktopManager.plasma6.enable = true;
@@ -27,7 +25,10 @@
 			qtile.enable = true;
 		};
 
-		xkbOptions = "ctrl:nocaps";
+		xkb = {
+            options = "ctrl:nocaps";
+		    layout = "us";
+        };
 	}; 
 	console.useXkbConfig = true;
 
@@ -40,7 +41,6 @@
 			percentageLow = 40;
 			percentageCritical = 10;
 			percentageAction = 20;
-			# criticalPowerAction = "${pkgs.notify-send}/bin/notify-send -u critical \"the battery level is below 20%\"";
 			criticalPowerAction = "Hibernate";
 		};
 		printing.enable = true;

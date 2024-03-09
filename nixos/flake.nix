@@ -9,8 +9,6 @@
       url = "github:nix-community/nixvim";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    nix-gc-env.url = "github:Julow/nix-gc-env";
   };
 
   outputs = { self, nixpkgs, home-manager, ... } @ inputs:
@@ -18,8 +16,6 @@
 
       inherit (self) outputs;
       system = "x86_64-linux";
-
-      # lib = nixpkgs.lib;
 
     in {
     nixosConfigurations."nixos" = inputs.nixpkgs.lib.nixosSystem {
@@ -30,26 +26,14 @@
       };
       modules = [
         
-        # ytmp.overlays.${system}.default]; 
-        ./configuration.nix
+        ./system-config/configuration.nix
       ];
     };
     homeConfigurations."ahmed@nixos" = 
       home-manager.lib.homeManagerConfiguration {
         pkgs = nixpkgs.legacyPackages.${system};
         extraSpecialArgs = {inherit inputs;};
-        modules = [./home.nix];
+        modules = [./home/home.nix];
     };
-      #   home-manager.nixosModules.home-manager
-      #   ({ pkgs, nixvim, config, ... }: {
-      #     home-manager = {
-      #     	useGlobalPkgs = true;
-      #     	useUserPackages = true;
-      #     	users = {
-      #     		ahmed = import ./user.nix; 
-      #     	};
-      #     };
-      #   })
-      # ];
   };
 }

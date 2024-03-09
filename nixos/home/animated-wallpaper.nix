@@ -56,7 +56,7 @@ in {
         PartOf = ["graphical-session.target"];
       };
       Service = {
-        ExecStart = "${rgw}/bin/rgw  ${../animated_wallpapers} 1920x1080+0+0";
+        ExecStart = "${rgw}/bin/rgw  ${../../animated_wallpapers} 1920x1080+0+0";
       };
     };
   };

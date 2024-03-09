@@ -4,10 +4,11 @@
   nix = {
     settings.auto-optimise-store = true;
     gc = {
-        automatic = true;
-        dates = "weekly";
-        delete_generations = "+20";
+      automatic = true;
+      dates = "weekly";
+      options = "--delete-older-than 30d";
     };
+
     package = pkgs.nixUnstable;
     extraOptions = ''
       experimental-features = nix-command flakes
@@ -20,12 +21,6 @@
       ./packages.nix
       ./services.nix
   ];
-
-  # nixpkgs.overlays = [
-  #   (final: prev: {
-  #     avr-sim = pkgs.callPackage ./avr-sim.nix { };
-  #   })
-  # ];
 
   networking = {
     hostName = "nixos";
