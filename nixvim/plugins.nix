@@ -4,43 +4,65 @@
     programs.nixvim.plugins = {
         telescope.enable = true;
         treesitter.enable = true;
-        markdown-preview.enable = true;
-        notify.enable = true;
-        comment-nvim = {
+        neo-tree = {
             enable = true;
-            opleader = {
-                line = "<leader>c";
-                block = "<leader>b";
-            };
-            toggler = {
-                line = "<leader>cc";
-                block = "<leader>bb";
+            enableGitStatus = true;
+            enableModifiedMarkers = true;
+            enableRefreshOnWrite = true;
+        };
+        markview.enable = true;
+        # notify.enable = true;
+        comment = {
+            enable = true;
+            settings = {
+                opleader = {
+                    line = "<leader>c";
+                    block = "<leader>b";
+                };
+                toggler = {
+                    line = "<leader>cc";
+                    block = "<leader>bb";
+                };
             };
 
         };
-        lualine.enable = true;
+        lualine = {
+            enable = true; 
+            disabledFiletypes.statusline = [
+                "neo-tree"
+            ];
+        };
         gitsigns.enable = true;
         lsp = {
             enable = true;
             servers = {
-                rnix-lsp.enable = true;
+                # rnix-lsp.enable = true;
                 pyright.enable = true;
                 ccls.enable = true;
                 lua-ls.enable = true;
                 csharp-ls.enable = true;
             };
         };
-        nvim-cmp = {
+        cmp = {
             enable = true;
-            sources = [
-              { name = "nvim_lsp"; }
-              { name = "path"; }
-              { name = "buffer"; }
+            settings = {
+		        sources = [
+            	  { name = "nvim_lsp"; }
+            	  { name = "path"; }
+            	  { name = "buffer"; }
+            	];
+            	mapping = {
+            	    "<tab>" = "cmp.mapping.select_next_item()";
+            	    "<s-tab>" = "cmp.mapping.select_prev_item()";
+            	};
+	        };
+        };
+        copilot-cmp = {
+            enable = true;
+            event = [
+              "InsertEnter"
+              "LspAttach"
             ];
-            mapping = {
-                "<tab>" = "cmp.mapping.select_next_item()";
-                "<s-tab>" = "cmp.mapping.select_prev_item()";
-            };
         };
         # neogen.enable = true;
     };

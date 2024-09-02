@@ -46,7 +46,8 @@ in{
     copyq
     trayer
     btop
-    racket
+    # racket
+    sshfs
 
     nodejs
     yarn

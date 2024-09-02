@@ -26,7 +26,7 @@
       };
       modules = [
         
-        ./system-config/configuration.nix
+        ./system/configuration.nix
       ];
     };
     homeConfigurations."ahmed@nixos" = 

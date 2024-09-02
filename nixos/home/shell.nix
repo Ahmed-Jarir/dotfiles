@@ -2,7 +2,7 @@
 let
   shellAliases = {
       rebuild = "sudo nixos-rebuild switch --flake /home/ahmed/dotfiles/nixos/";
-      hrebuild = "home-manager switch --flake /home/ahmed/dotfiles/nixos/ .#ahmed@nixos";
+      hrebuild = "home-manager switch --flake /home/ahmed/dotfiles/nixos/";
       qlog = "cat /home/ahmed/.local/share/qtile/qtile.log";
       pks = "nix search nixpkgs";
       nflake = "nix flake new -t github:nix-community/nix-direnv ./";

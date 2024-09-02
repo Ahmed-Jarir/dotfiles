@@ -2,7 +2,7 @@
 {
     programs.nixvim = {
     
-        options = {
+        opts = {
             number = true;
             relativenumber = true;
     
@@ -12,6 +12,7 @@
             wrap = false;
             signcolumn = "yes";
             guicursor = "i:block";
+            cursorline = true;
     
             tabstop = 4;
             shiftwidth = 4;
