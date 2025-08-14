@@ -8,7 +8,7 @@ sp_height = 0.85
 
 groups = [
     Group("SYS", spawn = terminal, layout = "bsp"),
-    Group("NET", spawn = "Brave-browser"),
+    Group("NET", spawn = "brave-browser"),
     Group("UNI", spawn = "nautilus"),
     Group("DOC"),
     Group(
@@ -28,12 +28,11 @@ groups = [
     ScratchPad(
         "scratchpad",
         [
-            DropDown(
-                "cmus", "kitty cmus", opacity = sp_opacity, y = sp_y, height = sp_height
-            ),
+            DropDown("dbv", "dbeaver", opacity = sp_opacity, y = sp_y, height = sp_height, on_focus_lost_hide = False),
             DropDown("term", "kitty", opacity = sp_opacity, y = sp_y, height = sp_height, on_focus_lost_hide = False),
         ],
     ),
 ]
+
 ##end keys##
 groups2 = [Group(i) for i in "123456789"]

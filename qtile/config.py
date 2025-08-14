@@ -45,10 +45,9 @@ from bars import *
 def autostart():
     sp.Popen("blueman-applet")
     sp.Popen("dunst")
-    sp.Popen("picom")
+    sp.Popen(["picom", "--config", "/home/ahmed/.config/picom/picom.conf"])
     sp.Popen("copyq")
     sp.Popen("sxhkd")
-
 
 screens = [
     Screen(

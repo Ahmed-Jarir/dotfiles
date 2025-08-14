@@ -17,16 +17,17 @@ in{
 
     #ides
     # jetbrains.clion
-    jetbrains.rider
+    # jetbrains.rider
     neovide
     # jetbrains.idea-ultimate
     # jetbrains.idea-community
     # jetbrains.pycharm-professional
+    dbeaver-bin
 
     #soc
     slack
-    zoom
-    # zoom-us
+    # zoom
+    zoom-us
     # signal-desktop
     discord
 
@@ -46,8 +47,8 @@ in{
     copyq
     trayer
     btop
-    # racket
     sshfs
+    racket
 
     nodejs
     yarn
@@ -63,6 +64,11 @@ in{
     zathura
     android-studio
     # avr-sim
+
+    appflowy
+    notion-app-enhanced
+    anydesk
+
   ];
 
 }

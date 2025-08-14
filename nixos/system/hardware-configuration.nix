@@ -37,7 +37,7 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware = {
-		cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
+    cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
 
     firmware = lib.mkIf (lib.versionOlder pkgs.linux-firmware.version "20230210") [ pkgs.rtw89-firmware ];
     graphics= {
@@ -59,6 +59,7 @@
         nvidiaBusId = "PCI:1:0:0";
       };
     };
+    openrazer.enable = true;
     pulseaudio.enable = false;
 		bluetooth = {
 		  enable = true;

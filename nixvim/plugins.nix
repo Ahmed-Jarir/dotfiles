@@ -2,6 +2,10 @@
 {pkgs, ...}:
 {
     programs.nixvim.plugins = {
+
+        auto-save = {
+            enable = true;
+        };
         telescope.enable = true;
         treesitter.enable = true;
         neo-tree = {
@@ -10,7 +14,21 @@
             enableModifiedMarkers = true;
             enableRefreshOnWrite = true;
         };
-        markview.enable = true;
+        markview = {
+            enable = true;
+            # settings = {
+            #     hybrid_modes = [
+            #       "i"
+            #       "r"
+            #       "v"
+            #     ];
+            #     mode = [
+            #       "i"
+            #       "n"
+            #       "v"
+            #     ];
+            # };
+        };
         # notify.enable = true;
         comment = {
             enable = true;
@@ -26,9 +44,19 @@
             };
 
         };
+        illuminate = {
+            enable = true;
+            providers = [
+              "lsp"
+              "treesitter"
+              "regex"
+            ];
+            delay = 100;
+            underCursor = true;
+        };
         lualine = {
             enable = true; 
-            disabledFiletypes.statusline = [
+            settings.options.disabled_filetypes.statusline = [
                 "neo-tree"
             ];
         };
@@ -39,8 +67,9 @@
                 # rnix-lsp.enable = true;
                 pyright.enable = true;
                 ccls.enable = true;
-                lua-ls.enable = true;
-                csharp-ls.enable = true;
+                lua_ls.enable = true;
+                csharp_ls.enable = true;
+                ts_ls.enable = true;
             };
         };
         cmp = {
@@ -59,12 +88,18 @@
         };
         copilot-cmp = {
             enable = true;
-            event = [
+            settings.event = [
               "InsertEnter"
               "LspAttach"
             ];
         };
+        sleuth = {
+            enable = true;
+            autoLoad = true;
+        };
         # neogen.enable = true;
+        web-devicons.enable = true;
     };
+
 
 }

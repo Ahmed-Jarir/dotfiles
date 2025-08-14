@@ -52,8 +52,10 @@ keys = [
     # Key([mod, "control"], "r",lazy.reload_config(), desc = "Reload the config"),
     Key("M-S-r", lazy.restart(), desc = "Restart Qtile"),
     Key("M-S-q", lazy.shutdown(), desc = "Shutdown Qtile"),
-    Key("M-m", lazy.group["scratchpad"].dropdown_toggle("cmus")),
+    Key("M-d", lazy.group["scratchpad"].dropdown_toggle("dbv")),
     Key("M-S-t", lazy.group["scratchpad"].dropdown_toggle("term")),
+
+    Key("M-S-<space>", lazy.widget["keyboardlayout"].next_keyboard()),
 ]
 ##end keys##
 ##mouse key bindings##
@@ -93,6 +95,14 @@ for ind, i in enumerate(groups2):
         ]
     )
 
+## multi screen kb ##
+keys.extend(
+    [
+        Key("M-<Down>", lazy.next_screen()),
+    ]
+)
+## end of multi screen kb ##
+
 keys.extend(
     [
         # go to surrounding groups
@@ -100,4 +110,5 @@ keys.extend(
         Key("A-l", lazy.screen.next_group()),
     ]
 )
+
 ##end group keys##

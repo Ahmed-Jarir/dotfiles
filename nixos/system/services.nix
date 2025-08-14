@@ -48,10 +48,11 @@
       };
       xkb = {
         options = "ctrl:nocaps";
-        layout = "us";
+        layout = "us,ara";
       };
-    };
 
+      xkbOptions = "grp:ctrl_alt";
+    };
   }; 
   console.useXkbConfig = true;
 }

@@ -59,7 +59,6 @@ in {
     ebtables
     virt-manager
 
-
     # gui tools
     rofi
     dmenu
@@ -69,6 +68,8 @@ in {
     stalonetray
     # qutebrowser
     libreoffice
+    openrazer-daemon
+    polychromatic
 
 
     # tools
@@ -85,8 +86,10 @@ in {
     python3
     brightnessctl
     xorg.xbacklight
-    python39Packages.dbus-next
+    python310Packages.dbus-next
     qgroundcontrol
+    betterlockscreen
+    autorandr
 
     # vim
     vim
@@ -100,5 +103,7 @@ in {
     # ue4
     # pstree
     xdotool
+
+    feh
   ];
 }

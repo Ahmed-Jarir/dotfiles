@@ -8,15 +8,10 @@
     
             smartindent = true;
             autoindent = true;
-            backspace = "indent,eol,start";
             wrap = false;
             signcolumn = "yes";
             guicursor = "i:block";
             cursorline = true;
-    
-            tabstop = 4;
-            shiftwidth = 4;
-            expandtab = true;
     
             termguicolors = true;
             title = true; 

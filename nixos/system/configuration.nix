@@ -1,4 +1,4 @@
-{ config, pkgs, ... }:
+{ config, pkgs, lib, ... }:
 
 {
 
@@ -8,6 +8,7 @@
       ./hardware-configuration.nix
       ./packages.nix
       ./services.nix
+      ./cisco-specialisation.nix
     ];
 
   nix = {
@@ -55,33 +56,41 @@
   virtualisation =  {
     libvirtd.enable = true;
     virtualbox.host.enable = true;
+    docker.enable = true;
   };
   programs = {
     dconf.enable = true;
     nm-applet.enable = true;
     light.enable = true;
     fish.enable = true;
+    steam = {
+      enable = true;
+      remotePlay.openFirewall = true;
+      dedicatedServer.openFirewall = true;
+      localNetworkGameTransfers.openFirewall = true;
+    };
   };  
 
   users.users.ahmed = {
     isNormalUser = true;
     description = "ahmed";
-    extraGroups = [ "networkmanager" "wheel" "libvirtd" ];
+    extraGroups = [ "docker" "networkmanager" "wheel" "libvirtd" "openrazer" ];
     shell = pkgs.fish;
   };
 
   nixpkgs = {
-    config.allowUnfree = true;
-    config.packageOverrides =  pkgs: rec{
-      vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+    config = {
+      allowUnfree = true;
+      packageOverrides =  pkgs: rec{
+        vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
+      };
     };
   };
    
   fonts.packages = with pkgs; [
-
-		(nerdfonts.override { fonts = [ "FiraCode" ]; })
+    minecraftia
+    nerd-fonts.fira-code
     font-awesome_5
-
   ];
 
 

@@ -1,6 +1,6 @@
 { pkgs, inputs, ... }:
 {
- nixpkgs = {
+  nixpkgs = {
     config.allowUnfree = true;
     config.packageOverrides =  pkgs: rec{
       vaapiIntel = pkgs.vaapiIntel.override { enableHybridCodec = true; };
@@ -16,6 +16,12 @@
     inputs.nixvim.homeManagerModules.nixvim
     ../../nixvim
   ];
+  xsession = {
+    enable = true;
+    initExtra = ''
+      xrandr --setprovideroutputsource NVIDIA-G0 0x53 && xrandr --output eDP --auto --output HDMI-1-0 --auto --right-of  eDP
+    '';
+  };
 
   home.username = "ahmed";
   home.homeDirectory = "/home/ahmed";
